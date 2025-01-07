@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 10  # Lambda 함수 타임아웃 설정
+    Handler: bootstrap
+    Runtime: provided.al2023
+    MemorySize: 128
+    Architectures:                   # 공통 아키텍처 설정
+      - x86_64
+    VpcConfig:                       # 공통 VPC 설정
+      SecurityGroupIds:
+        - sg-07fc0de84a8e119c0
+      SubnetIds:
+        - subnet-017c0de3d874cab7e
+        - subnet-00bd54fe53b26180d
+
+Resources:
+  ### API Gateway ###
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Cors:  # CORS 설정
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+        AllowHeaders: "'Content-Type,Authorization'"
+        AllowOrigin: "'*'"
+
+  ### Users Lambda Functions ###
+  UsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./users/
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /users/{id}
+            Method: GET
+            RestApiId: !Ref ApiGateway
+
+  ### Foods Lambda Functions ###
+  FoodsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./foods/
+      Events:
+        RecommendFoods:
+          Type: Api
+          Properties:
+            Path: /foods/recommend
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        DailyRecommendFoods:
+          Type: Api
+          Properties:
+            Path: /foods/daily-recommend
+            Method: GET
+            RestApiId: !Ref ApiGateway
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway URL"
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/dev"

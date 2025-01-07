@@ -1,0 +1,8 @@
+{
+    "httpMethod": "POST",
+    "path": "/foods/recommend",
+    "body": "",
+    "headers": {
+        "Content-Type": "application/json"
+    }
+}
