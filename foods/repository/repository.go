@@ -16,3 +16,8 @@ type RankFoodRepository struct {
 	GormDB      *gorm.DB
 	RedisClient *redis.Client
 }
+
+type SelectFoodRepository struct {
+	GormDB      *gorm.DB
+	RedisClient *redis.Client
+}
