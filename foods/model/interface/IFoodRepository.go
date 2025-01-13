@@ -7,11 +7,6 @@ import (
 	_mysql "github.com/JokerTrickster/common/db/mysql"
 )
 
-type IRecommendFoodRepository interface {
-	SaveRecommendFood(ctx context.Context, foodDTO *_mysql.Foods) (*_mysql.Foods, error)
-	FindOneOrCreateFoodImage(ctx context.Context, foodImageDTO *_mysql.FoodImages) (*_mysql.FoodImages, error)
-}
-
 type ISelectFoodRepository interface {
 	FindOneFood(ctx context.Context, foodDTO *_mysql.Foods) (uint, error)
 	InsertOneFoodHistory(ctx context.Context, foodHistoryDTO *_mysql.FoodHistories) error
@@ -60,19 +55,9 @@ type ISaveFoodRepository interface {
 type ICheckImageUploadFoodRepository interface {
 }
 
-type IV1RecommendFoodRepository interface {
-	FindOneV1RecommendFood(ctx context.Context, query string) (*_mysql.Foods, error)
-	SaveRecommendFood(ctx context.Context, foodDTO *_mysql.Foods) (*_mysql.Foods, error)
-	FindOneOrCreateFoodImage(ctx context.Context, foodImageDTO *_mysql.FoodImages) (*_mysql.FoodImages, error)
-	CountV1RecommendFood(ctx context.Context, query string) (int, error)
-	FindOneFoodImage(ctx context.Context, foodID int) (string, error)
-	FindOneNutrient(ctx context.Context, foodName string) (*_mysql.Nutrients, error)
-	FindOneAndSaveNutrient(ctx context.Context, nutrientDTO *_mysql.Nutrients) (*_mysql.Nutrients, error)
-}
-
-type IV12RecommendFoodRepository interface {
-	FindOneV12RecommendFood(ctx context.Context, query string) (*_mysql.Foods, error)
-	FindOneFoodImage(ctx context.Context, foodID int) (string, error)
+type IRecommendFoodRepository interface {
+	FindOneRecommendFood(ctx context.Context, query string) (*_mysql.Foods, error)
+	FindOneFoodImage(ctx context.Context, id int) (string, error)
 	FindOneNutrient(ctx context.Context, foodName string) (*_mysql.Nutrients, error)
 	FindOneAndSaveNutrient(ctx context.Context, nutrientDTO *_mysql.Nutrients) (*_mysql.Nutrients, error)
 }

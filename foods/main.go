@@ -32,17 +32,15 @@ func main() {
 func InitHandler() {
 	e := echo.New()
 
-	// Foods 핸들러 등록
-	e.POST("/foods/recommend", _jwt.TokenChecker(handler.Recommend))
 	// DB 초기화
 	mysqlService := _mysql.GetMySQLService()
 	if err := mysqlService.Initialize(context.Background(), "your-connection-string"); err != nil {
 		log.Fatalf("Failed to initialize MySQL: %v", err)
 	}
 	db, _ := mysqlService.GetGORMDB()
+	// 핸들러 등록
 	handler.NewDailyRecommendFoodHandler(e, usecase.NewDailyRecommendFoodUseCase(repository.NewDailyRecommendFoodRepository(db), 10*time.Second))
-
-	// Lambda 실행
+	handler.NewRecommendFoodHandler(e, usecase.NewRecommendFoodUseCase(repository.NewRecommendFoodRepository(db), 10*time.Second))
 	// Echo Lambda 어댑터 초기화
 	echoLambda = echoadapter.New(e)
 }

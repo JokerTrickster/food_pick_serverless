@@ -7,9 +7,6 @@ import (
 	"main/model/response"
 )
 
-type IRecommendFoodUseCase interface {
-	Recommend(c context.Context, entity entity.RecommendFoodEntity) (response.ResRecommendFood, error)
-}
 type ISelectFoodUseCase interface {
 	Select(c context.Context, entity entity.SelectFoodEntity) (response.ResSelectFood, error)
 }
@@ -45,10 +42,6 @@ type ICheckImageUploadFoodUseCase interface {
 	CheckImageUpload(c context.Context, req *request.ReqCheckImageUploadFood) error
 }
 
-type IV1RecommendFoodUseCase interface {
-	V1Recommend(c context.Context, entity entity.V1RecommendFoodEntity) (response.ResV1RecommendFood, error)
-}
-
-type IV12RecommendFoodUseCase interface {
-	V12Recommend(c context.Context, entity entity.V12RecommendFoodEntity) (response.ResV12RecommendFood, error)
+type IRecommendFoodUseCase interface {
+	Recommend(c context.Context, entity entity.RecommendFoodEntity) (response.ResRecommendFood, error)
 }
