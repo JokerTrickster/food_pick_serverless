@@ -1,8 +1,8 @@
 {
-        "httpMethod": "GET",
-        "path": "/foods/daily-recommend",
-        "body": null,
-        "headers": {
-            "Content-Type": "application/json"
-        }
+    "httpMethod": "GET",
+    "path": "/foods/daily-recommend",
+    "body": null,
+    "headers": {
+        "Content-Type": "application/json"
+    }
 }

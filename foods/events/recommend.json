@@ -3,6 +3,7 @@
     "path": "/foods/recommend",
     "body": "",
     "headers": {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNzM2NjgxNTU2NTYxLCJ1c2VySUQiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTczNjc2Nzk1Nn0.1plF0o7Oyt0fiupa8-vjyhBIR3IJeQBji0IZtz-K4zY"
     }
 }

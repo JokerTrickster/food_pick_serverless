@@ -1,31 +1,34 @@
- #!/bin/bash
+#!/bin/bash
 
-# 테스트할 함수 이름
-FUNCTION_NAME="RecommendFoodsFunction"
+# 테스트를 실행할 Lambda 함수와 이벤트 파일 목록
+# sam local invoke FoodsFunction --event ./foods/events/dailyRecommend.json
+declare -a tests=(
+    "FoodsFunction ./foods/events/dailyRecommend.json"
+    "FoodsFunction ./foods/events/recommend.json"
+)
 
-# 이벤트 파일 경로
-EVENT_FILE="foods/event.json"
+# 테스트 로그 디렉토리 생성
+LOG_DIR="./test_logs"
+mkdir -p $LOG_DIR
 
-# SAM CLI 설치 여부 확인
-if ! command -v sam &> /dev/null; then
-    echo "SAM CLI가 설치되어 있지 않습니다. 설치 후 다시 시도해주세요."
-    exit 1
-fi
+# 테스트 실행
+for test in "${tests[@]}"; do
+    # Lambda 함수 이름과 이벤트 파일 추출
+    IFS=" " read -r functionName eventFile <<< "$test"
 
-# 이벤트 파일이 존재하는지 확인
-if [ ! -f "$EVENT_FILE" ]; then
-    echo "이벤트 파일($EVENT_FILE)이 없습니다. event.json 파일을 생성해주세요."
-    exit 1
-fi
+    # 로그 파일 이름 생성
+    logFile="$LOG_DIR/${functionName}_$(basename $eventFile .json).log"
 
-# SAM local invoke 실행
-echo "로컬 테스트를 실행합니다: $FUNCTION_NAME"
-sam local invoke "$FUNCTION_NAME" --event "$EVENT_FILE"
+    # 테스트 실행
+    echo "Invoking $functionName with event $eventFile..."
+    sam local invoke "$functionName" --event "$eventFile" > "$logFile" 2>&1
 
-# 테스트 결과 출력
-if [ $? -eq 0 ]; then
-    echo "로컬 테스트 성공: $FUNCTION_NAME"
-else
-    echo "로컬 테스트 실패: $FUNCTION_NAME"
-    exit 1
-fi
+    # 결과 확인
+    if [ $? -eq 0 ]; then
+        echo "✅ $functionName with $eventFile succeeded. Logs saved to $logFile"
+    else
+        echo "❌ $functionName with $eventFile failed. Check logs in $logFile"
+    fi
+done
+
+echo "All tests completed. Check $LOG_DIR for logs."

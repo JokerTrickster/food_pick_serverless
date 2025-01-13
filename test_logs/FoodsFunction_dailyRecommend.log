@@ -1,0 +1,101 @@
+Invoking bootstrap (provided.al2023)
+
+Error: Credentials store error: StoreError('Credentials store docker-credential-desktop exited with "".')
+Traceback:
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/cli/cli_config_file.py", line 347, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/decorators.py", line 92, in new_func
+    return ctx.invoke(f, obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/metric.py", line 185, in wrapped
+    raise exception  # pylint: disable=raising-bad-type
+    ^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/metric.py", line 150, in wrapped
+    return_value = func(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/utils/version_checker.py", line 43, in wrapped
+    actual_result = func(*args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/cli/main.py", line 95, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/commands/local/invoke/cli.py", line 108, in cli
+    do_cli(
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/commands/local/invoke/cli.py", line 209, in do_cli
+    context.local_lambda_runner.invoke(
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/commands/local/lib/local_lambda.py", line 166, in invoke
+    self.local_runtime.invoke(
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/metric.py", line 325, in wrapped_func
+    return_value = func(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/lambdafn/runtime.py", line 224, in invoke
+    container = self.create(
+                ^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/lambdafn/runtime.py", line 96, in create
+    container = LambdaContainer(
+                ^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/docker/lambda_container.py", line 103, in __init__
+    image = LambdaContainer._get_image(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/docker/lambda_container.py", line 257, in _get_image
+    return lambda_image.build(runtime, packagetype, image, layers, architecture, function_name=function_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/docker/lambda_image.py", line 212, in build
+    self._check_base_image_is_current(base_image)
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/docker/lambda_image.py", line 486, in _check_base_image_is_current
+    if self.is_base_image_current(image_name):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/docker/lambda_image.py", line 510, in is_base_image_current
+    return self.get_local_image_digest(image_name) == self.get_remote_image_digest(image_name)
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/local/docker/lambda_image.py", line 526, in get_remote_image_digest
+    remote_info = self.docker_client.images.get_registry_data(image_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/models/images.py", line 354, in get_registry_data
+    attrs=self.client.api.inspect_distribution(name, auth_config),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/utils/decorators.py", line 32, in wrapper
+    return f(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/utils/decorators.py", line 19, in wrapped
+    return f(self, resource_id, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/api/image.py", line 278, in inspect_distribution
+    header = auth.get_config_header(self, registry)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/auth.py", line 44, in get_config_header
+    authcfg = resolve_authconfig(
+              ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/auth.py", line 312, in resolve_authconfig
+    return authconfig.resolve_authconfig(registry)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/auth.py", line 223, in resolve_authconfig
+    cfg = self._resolve_authconfig_credstore(registry, store_name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/docker/auth.py", line 268, in _resolve_authconfig_credstore
+    raise errors.DockerException(
+
+An unexpected error was encountered while executing "sam local invoke".
+Search for an existing issue:
+https://github.com/aws/aws-sam-cli/issues?q=is%3Aissue+is%3Aopen+Bug%3A%20sam%20local%20invoke%20-%20DockerException
+Or create a bug report:
+https://github.com/aws/aws-sam-cli/issues/new?template=Bug_report.md&title=Bug%3A%20sam%20local%20invoke%20-%20DockerException

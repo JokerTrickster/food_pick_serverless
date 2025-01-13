@@ -1,0 +1,43 @@
+Invoking bootstrap (provided.al2023)
+Exception ignored in atexit callback: <function emit_all_metrics at 0x10ebfa980>
+Traceback (most recent call last):
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/metric.py", line 396, in emit_all_metrics
+    emit_metric(key)
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/metric.py", line 390, in emit_metric
+    telemetry.emit(_get_metric(metric_name))
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/telemetry.py", line 44, in emit
+    self._send({metric.get_metric_name(): metric.get_data()})
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/samcli/lib/telemetry/telemetry.py", line 76, in _send
+    r = requests.post(self._url, json=payload, timeout=timeout)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/urllib3/connectionpool.py", line 466, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1095, in _validate_conn
+    conn.connect()
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/urllib3/connection.py", line 693, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/urllib3/connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/aws-sam-cli/1.125.0/libexec/lib/python3.12/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt: 
