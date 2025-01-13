@@ -6,7 +6,8 @@ import (
 )
 
 type DailyRecommendFoodRepository struct {
-	GormDB *gorm.DB
+	GormDB      *gorm.DB
+	RedisClient *redis.Client
 }
 
 type RecommendFoodRepository struct {
@@ -18,6 +19,11 @@ type RankFoodRepository struct {
 }
 
 type SelectFoodRepository struct {
+	GormDB      *gorm.DB
+	RedisClient *redis.Client
+}
+
+type MetaFoodRepository struct {
 	GormDB      *gorm.DB
 	RedisClient *redis.Client
 }

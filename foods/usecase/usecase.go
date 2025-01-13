@@ -1,11 +1,13 @@
 package usecase
 
 import (
+	"context"
 	"fmt"
 	"main/model/entity"
 	"main/model/request"
 	"main/model/response"
 
+	_aws "github.com/JokerTrickster/common/aws"
 	_mysql "github.com/JokerTrickster/common/db/mysql"
 
 	"strconv"
@@ -263,5 +265,66 @@ func CreateResRecommend(food *_mysql.Foods, imageUrl string, nutrientDTO *_mysql
 		Fat:          nutrientDTO.Fat,
 	}
 	res.FoodNames = append(res.FoodNames, foodRes)
+	return res
+}
+
+func CreateResMetaData(typeDTO []_mysql.Types, timeDTO []_mysql.Times, scenarioDTO []_mysql.Scenarios, themesDTO []_mysql.Themes) response.ResMetaData {
+	var res response.ResMetaData
+	var metaData response.MetaData
+	s3Service := _aws.GetS3Service("ap-northeast-2")
+	//상황 -> 시간 -> 종륲별 -> 맛 -> 기분/테마별
+	for _, t := range scenarioDTO {
+		category := response.Category{
+			Name:  t.Name,
+			Image: t.Image,
+		}
+		imageUrl, err := s3Service.GetSignedURL(context.TODO(), t.Image, _aws.ImgTypeCategory)
+		if err != nil {
+			return response.ResMetaData{}
+		}
+		category.Image = imageUrl
+		metaData.Scenarios = append(metaData.Scenarios, category)
+	}
+
+	for _, t := range timeDTO {
+		category := response.Category{
+			Name:  t.Name,
+			Image: t.Image,
+		}
+		imageUrl, err := s3Service.GetSignedURL(context.TODO(), t.Image, _aws.ImgTypeCategory)
+		if err != nil {
+			return response.ResMetaData{}
+		}
+		category.Image = imageUrl
+		metaData.Times = append(metaData.Times, category)
+	}
+	for _, t := range typeDTO {
+		category := response.Category{
+			Name: t.Name,
+		}
+		imageUrl, err := s3Service.GetSignedURL(context.TODO(), t.Image, _aws.ImgTypeCategory)
+		if err != nil {
+			return response.ResMetaData{}
+		}
+		category.Image = imageUrl
+		metaData.Types = append(metaData.Types, category)
+	}
+
+	for _, t := range themesDTO {
+		category := response.Category{
+			Name:  t.Name,
+			Image: t.Image,
+		}
+		imageUrl, err := s3Service.GetSignedURL(context.TODO(), t.Image, _aws.ImgTypeCategory)
+		if err != nil {
+			return response.ResMetaData{}
+		}
+		category.Image = imageUrl
+		metaData.Themes = append(metaData.Themes, category)
+	}
+
+	res.MetaData = metaData
+	res.MetaKeys = []string{"types", "times", "scenarios", "themes"}
+	res.MetaKRKeys = []string{"종류별", "시간별", "상황별", "기분/테마별"}
 	return res
 }

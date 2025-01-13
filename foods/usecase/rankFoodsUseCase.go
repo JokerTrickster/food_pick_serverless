@@ -38,7 +38,7 @@ func (d *RankFoodUseCase) Rank(c context.Context) (response.ResRankFood, error) 
 		//현재 랭킹 레디스에 저장한다.
 
 		for _, food := range currentRanks {
-			err := d.Repository.IncrementFoodRank(ctx, _redis.RankingKey, food.Name, food.Score)
+			err := d.Repository.IncrementFoodRank(ctx, _redis.FoodRankingKey, food.Name, food.Score)
 			if err != nil {
 				return response.ResRankFood{}, err
 			}

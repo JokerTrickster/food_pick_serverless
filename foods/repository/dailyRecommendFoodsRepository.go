@@ -3,15 +3,36 @@ package repository
 import (
 	"context"
 	_interface "main/model/interface"
+	"time"
 
 	_mysql "github.com/JokerTrickster/common/db/mysql"
 	_error "github.com/JokerTrickster/common/error"
+	"github.com/redis/go-redis/v9"
 
 	"gorm.io/gorm"
 )
 
-func NewDailyRecommendFoodRepository(gormDB *gorm.DB) _interface.IDailyRecommendFoodRepository {
-	return &DailyRecommendFoodRepository{GormDB: gormDB}
+func NewDailyRecommendFoodRepository(gormDB *gorm.DB, redisClient *redis.Client) _interface.IDailyRecommendFoodRepository {
+	return &DailyRecommendFoodRepository{GormDB: gormDB, RedisClient: redisClient}
+}
+
+func (g *DailyRecommendFoodRepository) RedisFindAllDailyRecommend(ctx context.Context, key string) (string, error) {
+	meta, err := g.RedisClient.Get(ctx, key).Result()
+	if err != nil {
+		if err == redis.Nil {
+			return "", nil
+		}
+		return "", _error.CreateError(ctx, string(_error.ErrInternalDB), _error.Trace(), _error.HandleError(err.Error()), string(_error.ErrFromRedis))
+	}
+	return meta, nil
+}
+
+func (g *DailyRecommendFoodRepository) RedisSetAllDailyRecommend(ctx context.Context, key string, data []byte) error {
+	err := g.RedisClient.Set(ctx, key, data, 1*time.Hour).Err()
+	if err != nil {
+		return _error.CreateError(ctx, string(_error.ErrInternalDB), _error.Trace(), _error.HandleError(err.Error()), string(_error.ErrFromRedis))
+	}
+	return nil
 }
 func (d *DailyRecommendFoodRepository) FindOneFood(ctx context.Context, foodName string) (*_mysql.Foods, error) {
 	food := _mysql.Foods{}

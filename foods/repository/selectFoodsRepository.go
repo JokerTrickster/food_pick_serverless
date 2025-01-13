@@ -32,7 +32,7 @@ func (g *SelectFoodRepository) InsertOneFoodHistory(ctx context.Context, foodHis
 }
 
 func (g *SelectFoodRepository) IncrementFoodRanking(ctx context.Context, name string, score float64) error {
-	redisKey := _redis.RankingKey
+	redisKey := _redis.FoodRankingKey
 	_, err := g.RedisClient.ZIncrBy(ctx, redisKey, score, name).Result()
 	if err != nil {
 		return _errors.CreateError(ctx, string(_errors.ErrInternalDB), _errors.Trace(), _errors.HandleError(string(_errors.ErrInternalServer)+err.Error(), name), string(_errors.ErrFromRedis))

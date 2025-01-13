@@ -22,6 +22,8 @@ type IMetaFoodRepository interface {
 	FindAllTimeMeta(ctx context.Context) ([]_mysql.Times, error)
 	FindAllScenarioMeta(ctx context.Context) ([]_mysql.Scenarios, error)
 	FindAllThemesMeta(ctx context.Context) ([]_mysql.Themes, error)
+	RedisFindAllMeta(ctx context.Context, key string) (string, error)
+	RedisSetAllMeta(ctx context.Context, key string, data []byte) error
 }
 
 type IRankFoodRepository interface {
@@ -42,6 +44,8 @@ type IDailyRecommendFoodRepository interface {
 	FindOneFood(ctx context.Context, foodName string) (*_mysql.Foods, error)
 	FindOneFoodImage(ctx context.Context, foodID int) (string, error)
 	FindRandomFoods(ctx context.Context, limit int) ([]*_mysql.Foods, error)
+	RedisFindAllDailyRecommend(ctx context.Context, key string) (string, error)
+	RedisSetAllDailyRecommend(ctx context.Context, key string, data []byte) error
 }
 
 type ISaveFoodRepository interface {

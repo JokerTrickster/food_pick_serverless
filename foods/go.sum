@@ -12,6 +12,8 @@ cloud.google.com/go/longrunning v0.5.7 h1:WLbHekDbjK1fVFD3ibpFFVoyizlLRl73I7YKuA
 cloud.google.com/go/longrunning v0.5.7/go.mod h1:8GClkudohy1Fxm3owmBGid8W0pSgodEMwEAztp38Xng=
 github.com/JokerTrickster/common v0.0.6 h1:qJ9/HCYux0jFlTsYnWqceGupjjIGPvhc4XhrAQ7YIqk=
 github.com/JokerTrickster/common v0.0.6/go.mod h1:nwHbk2em/Cwp2ezQV106d7RlF46tkf6yD+VycapMieE=
+github.com/JokerTrickster/common v0.0.7 h1:mqnPwfKF1sVoh44/mItjHCx9qyyI+MFwJaDBFKrIjEo=
+github.com/JokerTrickster/common v0.0.7/go.mod h1:nwHbk2em/Cwp2ezQV106d7RlF46tkf6yD+VycapMieE=
 github.com/aws/aws-lambda-go v1.47.0 h1:0H8s0vumYx/YKs4sE7YM0ktwL2eWse+kfopsRI1sXVI=
 github.com/aws/aws-lambda-go v1.47.0/go.mod h1:dpMpZgvWx5vuQJfBt0zqBha60q7Dd7RfgJv23DymV8A=
 github.com/aws/aws-sdk-go-v2 v1.32.8 h1:cZV+NUS/eGxKXMtmyhtYPJ7Z4YLoI/V8bkTdRZfYhGo=

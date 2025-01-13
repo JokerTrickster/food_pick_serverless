@@ -6,7 +6,20 @@ This is a sample template for food-pick - Below is a brief explanation of what w
 .
 ├── Makefile                    <-- Make to automate build
 ├── README.md                   <-- This instructions file
-├── hello-world                 <-- Source code for a lambda function
+├── fooods                      <-- 음식 도메인 람다 코드 
+│   ├── events                  <-- 람다 테스트 이벤트 json 파일들
+│   ├── handler                 <-- 핸들러 영역
+│   ├── usecase                 <-- 유스케이스 영역
+│   ├── repository              <-- 레포지토리 영역
+│   ├── model                   <-- 모델 (엔티티, 요청, 응답, 인터페이스 관리)
+│   ├── main.go                 <-- Lambda function code
+│   └── main_test.go            <-- Unit tests
+├── users                       <-- 유저 도메인 람다 코드 
+│   ├── ...                     <-- foods 폴더 구조와 동일
+│   ├── main.go                 <-- Lambda function code
+│   └── main_test.go            <-- Unit tests
+├── auth                        <-- 안증 도메인 람다 코드 
+│   ├── ...                     <-- foods 폴더 구조와 동일
 │   ├── main.go                 <-- Lambda function code
 │   └── main_test.go            <-- Unit tests
 └── template.yaml

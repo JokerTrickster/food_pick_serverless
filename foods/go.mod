@@ -3,7 +3,7 @@ module main
 go 1.22.1
 
 require (
-	github.com/JokerTrickster/common v0.0.6
+	github.com/JokerTrickster/common v0.0.7
 	github.com/aws/aws-lambda-go v1.47.0
 	github.com/awslabs/aws-lambda-go-api-proxy v0.16.2
 	github.com/google/generative-ai-go v0.16.0
@@ -88,7 +88,7 @@ require (
 )
 
 replace (
-	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.6
+	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.7
 	github.com/labstack/echo/v4 => github.com/labstack/echo/v4 v4.12.0
 
 )

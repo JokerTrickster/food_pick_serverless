@@ -41,10 +41,11 @@ func InitHandler() {
 	redis, _ := redisService.GetClient(context.Background())
 
 	// 핸들러 등록
-	handler.NewDailyRecommendFoodHandler(e, usecase.NewDailyRecommendFoodUseCase(repository.NewDailyRecommendFoodRepository(db), 10*time.Second))
+	handler.NewDailyRecommendFoodHandler(e, usecase.NewDailyRecommendFoodUseCase(repository.NewDailyRecommendFoodRepository(db, redis), 10*time.Second))
 	handler.NewRecommendFoodHandler(e, usecase.NewRecommendFoodUseCase(repository.NewRecommendFoodRepository(db), 10*time.Second))
 	handler.NewRankFoodHandler(e, usecase.NewRankFoodUseCase(repository.NewRankFoodRepository(db, redis), 10*time.Second))
 	handler.NewSelectFoodHandler(e, usecase.NewSelectFoodUseCase(repository.NewSelectFoodRepository(db, redis), 10*time.Second))
+	handler.NewMetaFoodHandler(e, usecase.NewMetaFoodUseCase(repository.NewMetaFoodRepository(db,redis), 10*time.Second))
 	// Echo Lambda 어댑터 초기화
 	echoLambda = echoadapter.New(e)
 }
@@ -59,7 +60,6 @@ func InitServer() {
 	// Initialize Redis
 	InitializeRedis()
 
-	
 }
 func InitializeRedis() {
 	ctx := context.Background()
@@ -153,4 +153,3 @@ func formatRedisConnectionString(params []string) string {
 		params[2], //db
 	)
 }
-

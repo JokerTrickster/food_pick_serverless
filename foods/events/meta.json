@@ -1,0 +1,8 @@
+{
+    "httpMethod": "GET",
+    "path": "/foods/meta",
+    "body": "",
+    "headers": {
+        "Content-Type": "application/json"
+    }
+}

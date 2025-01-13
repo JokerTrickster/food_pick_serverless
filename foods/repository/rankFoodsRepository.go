@@ -18,7 +18,7 @@ func NewRankFoodRepository(gormDB *gorm.DB, redisClient *redis.Client) _interfac
 func (g *RankFoodRepository) RankTop(ctx context.Context) ([]*entity.RankFoodRedis, error) {
 	//get Ranks foods
 
-	currentRanks, err := g.RedisClient.ZRevRangeWithScores(ctx, _redis.RankingKey, 0, -1).Result()
+	currentRanks, err := g.RedisClient.ZRevRangeWithScores(ctx, _redis.FoodRankingKey, 0, -1).Result()
 	if err != nil {
 		if err == redis.Nil {
 			return nil, nil
