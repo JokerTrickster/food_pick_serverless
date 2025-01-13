@@ -34,13 +34,16 @@ func InitHandler() {
 
 	// DB 초기화
 	mysqlService := _mysql.GetMySQLService()
-	if err := mysqlService.Initialize(context.Background(), "your-connection-string"); err != nil {
-		log.Fatalf("Failed to initialize MySQL: %v", err)
-	}
+
 	db, _ := mysqlService.GetGORMDB()
+	// 레디스 초기화
+	redisService := _redis.GetRedisService()
+	redis, _ := redisService.GetClient(context.Background())
+
 	// 핸들러 등록
 	handler.NewDailyRecommendFoodHandler(e, usecase.NewDailyRecommendFoodUseCase(repository.NewDailyRecommendFoodRepository(db), 10*time.Second))
 	handler.NewRecommendFoodHandler(e, usecase.NewRecommendFoodUseCase(repository.NewRecommendFoodRepository(db), 10*time.Second))
+	handler.NewRankFoodHandler(e, usecase.NewRankFoodUseCase(repository.NewRankFoodRepository(db, redis), 10*time.Second))
 	// Echo Lambda 어댑터 초기화
 	echoLambda = echoadapter.New(e)
 }

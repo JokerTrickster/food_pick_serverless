@@ -13,8 +13,8 @@ type IHistoryFoodHandler interface {
 type IMetaFoodHandler interface {
 	Meta(c echo.Context) error
 }
-type IRankingFoodHandler interface {
-	Ranking(c echo.Context) error
+type IRankFoodHandler interface {
+	Rank(c echo.Context) error
 }
 type IImageUploadFoodHandler interface {
 	ImageUpload(c echo.Context) error

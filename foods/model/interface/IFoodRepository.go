@@ -24,10 +24,10 @@ type IMetaFoodRepository interface {
 	FindAllThemesMeta(ctx context.Context) ([]_mysql.Themes, error)
 }
 
-type IRankingFoodRepository interface {
-	RankingTop(ctx context.Context) ([]*entity.RankFoodRedis, error)
-	FindRankingFoodHistories(ctx context.Context) ([]*entity.RankFoodRedis, error)
-	IncrementFoodRanking(ctx context.Context, redisKey string, foodName string, score float64) error
+type IRankFoodRepository interface {
+	RankTop(ctx context.Context) ([]*entity.RankFoodRedis, error)
+	FindRankFoodHistories(ctx context.Context) ([]*entity.RankFoodRedis, error)
+	IncrementFoodRank(ctx context.Context, redisKey string, foodName string, score float64) error
 }
 
 type IImageUploadFoodRepository interface {
