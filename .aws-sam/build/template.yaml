@@ -15,6 +15,27 @@ Globals:
       - subnet-017c0de3d874cab7e
       - subnet-00bd54fe53b26180d
 Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Policies:
+      - PolicyName: AllowSSMAccess
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - ssm:*
+            Resource: '*'
   ApiGateway:
     Type: AWS::Serverless::Api
     Properties:
@@ -27,12 +48,51 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: UsersFunction
+      Role:
+        Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
       Events:
         GetUser:
           Type: Api
           Properties:
-            Path: /users/{id}
+            Path: /users/{userID}
             Method: GET
+            RestApiId:
+              Ref: ApiGateway
+        DeleteUser:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: DELETE
+            RestApiId:
+              Ref: ApiGateway
+        UpdateUserProfile:
+          Type: Api
+          Properties:
+            Path: /users/profile
+            Method: PUT
+            RestApiId:
+              Ref: ApiGateway
+        UpdateUserProfileImage:
+          Type: Api
+          Properties:
+            Path: /users/profiles/image
+            Method: POST
+            RestApiId:
+              Ref: ApiGateway
+        MessageUser:
+          Type: Api
+          Properties:
+            Path: /users/message
+            Method: POST
+            RestApiId:
+              Ref: ApiGateway
+        AllMessageUser:
+          Type: Api
+          Properties:
+            Path: /users/message/all
+            Method: POST
             RestApiId:
               Ref: ApiGateway
     Metadata:
@@ -41,6 +101,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: FoodsFunction
+      Role:
+        Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
       Events:
         RecommendFoods:
           Type: Api
@@ -54,6 +118,27 @@ Resources:
           Properties:
             Path: /foods/daily-recommend
             Method: GET
+            RestApiId:
+              Ref: ApiGateway
+        MetaFoods:
+          Type: Api
+          Properties:
+            Path: /foods/meta
+            Method: GET
+            RestApiId:
+              Ref: ApiGateway
+        RankFoods:
+          Type: Api
+          Properties:
+            Path: /foods/rank
+            Method: GET
+            RestApiId:
+              Ref: ApiGateway
+        SelectFoods:
+          Type: Api
+          Properties:
+            Path: /foods/select
+            Method: POST
             RestApiId:
               Ref: ApiGateway
     Metadata:

@@ -2,7 +2,7 @@
 
 BINARY_NAME=bootstrap# Lambda에서 실행될 바이너리 이름은 항상 bootstrap이어야 합니다.
 TARGET_FOLDER=$(ARTIFACTS_DIR)# SAM 빌드에서 전달받는 빌드 아티팩트 경로
-SRC_FILE=get_users.go
+SRC_FILE=main.go
 
 .PHONY: build build-UsersFunction clean
 

@@ -2,9 +2,9 @@ package _interface
 
 import (
 	"context"
-	"main/features/user/model/entity"
-	"main/features/user/model/request"
-	"main/features/user/model/response"
+	"main/model/entity"
+	"main/model/request"
+	"main/model/response"
 )
 
 type IGetUserUseCase interface {

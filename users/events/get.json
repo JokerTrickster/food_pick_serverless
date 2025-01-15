@@ -1,0 +1,14 @@
+{
+    "httpMethod": "GET",
+    "path": "/users/33",
+    "headers": {
+        "Content-Type": "application/json",
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNzM2OTE1MTU0MDI5LCJ1c2VySUQiOjMzLCJlbWFpbCI6InJ5YW5AZ21haWwuY29tIiwiZXhwIjoxNzM3MDAxNTU0fQ.V98rzPkMDYi4AObPHkjKc3NpWaxqS5U5gc695ZeL2Tw"
+    },
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": {
+        "userID": "33"
+    },
+    "body": null
+}

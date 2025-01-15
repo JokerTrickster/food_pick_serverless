@@ -1,0 +1,10 @@
+{
+    "httpMethod": "POST",
+    "path": "/users/profiles/image",
+    "headers": {
+        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNzM2OTA4NzExOTc0LCJ1c2VySUQiOjMzLCJlbWFpbCI6InJ5YW5AZ21haWwuY29tIiwiZXhwIjoxNzM2OTk1MTExfQ.ux7CDf6b7c0bImye1dQMH_gnXcFkKbDvi1LE7wMrTpM"
+    },
+    "body": "----WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"file\"; filename=\"profile.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n[BASE64_ENCODED_IMAGE]\r\n----WebKitFormBoundary7MA4YWxkTrZu0gW--",
+    "isBase64Encoded": true
+}

@@ -1,0 +1,9 @@
+{
+    "httpMethod": "POST",
+    "path": "/users/message/all",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": "{\"role\": \"foodadmin\", \"title\": \"서버리스 테스트\", \"message\": \"서버리스 전환 과정 테스트 중 \"}",
+    "isBase64Encoded": false
+}

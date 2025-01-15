@@ -1,0 +1,10 @@
+{
+    "httpMethod": "PUT",
+    "path": "/users/profile",
+    "headers": {
+        "Content-Type": "application/json",
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNzM2OTE1MTU0MDI5LCJ1c2VySUQiOjMzLCJlbWFpbCI6InJ5YW5AZ21haWwuY29tIiwiZXhwIjoxNzM3MDAxNTU0fQ.V98rzPkMDYi4AObPHkjKc3NpWaxqS5U5gc695ZeL2Tw"
+    },
+    "body": "{\"birth\": \"1990-01-01\", \"sex\": \"male\", \"name\": \"John Doe\", \"newPassword\": \"asd123\", \"prevPassword\": \"asd123\", \"push\": true}",
+    "isBase64Encoded": false
+}

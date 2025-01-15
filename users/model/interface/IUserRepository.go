@@ -2,15 +2,15 @@ package _interface
 
 import (
 	"context"
-	"main/utils/db/mysql"
+	_mysql "github.com/JokerTrickster/common/db/mysql"
 )
 
 type IGetUserRepository interface {
-	FindOneUser(ctx context.Context, uID uint) (*mysql.Users, error)
+	FindOneUser(ctx context.Context, uID uint) (*_mysql.Users, error)
 }
 
 type IUpdateUserRepository interface {
-	FindOneAndUpdateUser(ctx context.Context, userDTO *mysql.Users) error
+	FindOneAndUpdateUser(ctx context.Context, userDTO *_mysql.Users) error
 	CheckPassword(ctx context.Context, id uint, prevPassword string) error
 }
 
@@ -27,6 +27,6 @@ type IUpdateProfileUserRepository interface {
 }
 
 type IAllMessageUserRepository interface {
-	FindUsersForNotifications(ctx context.Context) ([]*mysql.Users, error)
+	FindUsersForNotifications(ctx context.Context) ([]*_mysql.Users, error)
 	FindOnePushToken(ctx context.Context, uID uint) (string, error)
 }
