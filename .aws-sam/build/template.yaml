@@ -242,7 +242,7 @@ Resources:
         GoogleOauthCallback:
           Type: Api
           Properties:
-            Path: /v0.2/auth/google/callback
+            Path: /auth/google/callback
             Method: GET
             RestApiId:
               Ref: ApiGateway
