@@ -1,0 +1,12 @@
+{
+    "httpMethod": "POST",
+    "path": "/auth/signin",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "email": "example@example.com",
+        "password": "example_password"
+    },
+    "isBase64Encoded": false
+}

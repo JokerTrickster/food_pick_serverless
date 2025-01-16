@@ -131,6 +131,85 @@ Resources:
             Method: POST
             RestApiId: !Ref ApiGateway
 
+  ### Auth Lambda Functions ###
+  AuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./auth/
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Events:
+        CheckEmailAuth:
+          Type: Api
+          Properties:
+            Path: /auth/email/check
+            Method: GET
+            RestApiId: !Ref ApiGateway
+        GuestAuth:
+          Type: Api
+          Properties:
+            Path: /auth/guest
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        LogoutAuth:
+          Type: Api
+          Properties:
+            Path: /auth/logout
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        ReissueAuth:
+          Type: Api
+          Properties:
+            Path: /auth/token/reissue
+            Method: PUT
+            RestApiId: !Ref ApiGateway
+        RequestPasswordAuth:
+          Type: Api
+          Properties:
+            Path: /auth/password/request
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        RequestSignupAuth:
+          Type: Api
+          Properties:
+            Path: /auth/signup/request
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        SaveFCMTokenAuth:
+          Type: Api
+          Properties:
+            Path: /auth/fcm/token
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        SigninAuth:
+          Type: Api
+          Properties:
+            Path: /auth/signin
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        SignupAuth:
+          Type: Api
+          Properties:
+            Path: /auth/signup
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        ValidatePasswordAuth:
+          Type: Api
+          Properties:
+            Path: /auth/password/validate
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        KakaoOauth:
+          Type: Api
+          Properties:
+            Path: /auth/kakao
+            Method: POST
+            RestApiId: !Ref ApiGateway
+        GoogleOauthCallback:
+          Type: Api
+          Properties:
+            Path: /v0.2/auth/google/callback
+            Method: GET
+            RestApiId: !Ref ApiGateway
 Outputs:
   ApiUrl:
     Description: "API Gateway URL"

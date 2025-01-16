@@ -1,0 +1,12 @@
+{
+    "httpMethod": "GET",
+    "path": "/auth/email/check",
+    "queryStringParameters": {
+        "email": "ryan@gmail.com"
+    },
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": null,
+    "isBase64Encoded": false
+}

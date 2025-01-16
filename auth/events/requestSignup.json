@@ -1,0 +1,11 @@
+{
+    "httpMethod": "POST",
+    "path": "/auth/signup/request",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "email": "ryan@gmail.com"
+    },
+    "isBase64Encoded": false
+}

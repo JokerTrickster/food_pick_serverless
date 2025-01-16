@@ -2,9 +2,9 @@ package _interface
 
 import (
 	"context"
-	"main/features/auth/model/entity"
-	"main/features/auth/model/request"
-	"main/features/auth/model/response"
+	"main/model/entity"
+	"main/model/request"
+	"main/model/response"
 )
 
 type ISignupAuthUseCase interface {
@@ -43,15 +43,9 @@ type IGoogleOauthAuthUseCase interface {
 }
 
 type IGoogleOauthCallbackAuthUseCase interface {
-	GoogleOauthCallback(c context.Context, code string) (response.GoogleOauthCallbackRes, error)
+	GoogleOauthCallback(c context.Context, code string) (response.ResGoogleOauthCallback, error)
 }
 
-type IV02GoogleOauthCallbackAuthUseCase interface {
-	V02GoogleOauthCallback(c context.Context, code string) (response.ResV02GoogleOauthCallback, error)
-}
-type IV02GoogleOauthAuthUseCase interface {
-	V02GoogleOauth(c context.Context, req *request.ReqV02GoogleOauth) (response.ResV02GoogleOauth, error)
-}
 
 type IKakaoOauthAuthUseCase interface {
 	KakaoOauth(c context.Context, req *request.ReqKakaoOauth) (response.ResKakaoOauth, error)

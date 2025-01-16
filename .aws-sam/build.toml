@@ -5,7 +5,7 @@ codeuri = "/Users/mac/project/food_pick_serverless/users"
 runtime = "provided.al2023"
 architecture = "x86_64"
 handler = "bootstrap"
-source_hash = "5fc15fe6dd40ffd4b8da617e9656c996a22a2d9c4da6e5b08d5737a793b7ba5c"
+source_hash = "f5aaf02e963916be6df623dcec2b4b660f65021850e1ff991be81fb642b6ef76"
 manifest_hash = ""
 packagetype = "Zip"
 functions = ["UsersFunction"]
@@ -15,9 +15,19 @@ codeuri = "/Users/mac/project/food_pick_serverless/foods"
 runtime = "provided.al2023"
 architecture = "x86_64"
 handler = "bootstrap"
-source_hash = "96a16e214434292f0bba86f02a4ebb1f1de14c2d04fd903a049e06d17006753c"
+source_hash = "bcc39fc6d62de55d3494e8d54dd4eda92021e68663d51da164a600a364c66eac"
 manifest_hash = ""
 packagetype = "Zip"
 functions = ["FoodsFunction"]
+
+[function_build_definitions.ff91480e-5cc6-4950-9b7a-725058c8101e]
+codeuri = "/Users/mac/project/food_pick_serverless/auth"
+runtime = "provided.al2023"
+architecture = "x86_64"
+handler = "bootstrap"
+source_hash = "77aaad2b0e66316c23c62d3e9532d72c612d31b0397ab81002a593a22be0ac46"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["AuthFunction"]
 
 [layer_build_definitions]

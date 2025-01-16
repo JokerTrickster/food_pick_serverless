@@ -1,0 +1,12 @@
+{
+    "httpMethod": "PUT",
+    "path": "/auth/token/reissue",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMzLCJleHAiOjE3MzY5OTUxMTF9.abc123exampleAccessToken",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMzLCJleHAiOjE3NDAyODUxMTF9.abc123exampleRefreshToken"
+    },
+    "isBase64Encoded": false
+}

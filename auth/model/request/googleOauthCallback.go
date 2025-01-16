@@ -1,5 +1,5 @@
 package request
 
-type ReqV02GoogleOauthCallback struct {
+type ReqGoogleOauthCallback struct {
 	Code string `query:"code"`
 }

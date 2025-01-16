@@ -1,0 +1,12 @@
+{
+    "httpMethod": "POST",
+    "path": "/auth/fcm/token",
+    "headers": {
+        "Content-Type": "application/json",
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNjkzOTk5NTExLCJ1c2VySUQiOjMzLCJleHAiOjE2OTM5OTk4MTF9.q1WsBQUCjqcDh5aVL1zNzOdOlWy5PXwtQgOEXbF-Ow8"
+    },
+    "body": {
+        "token": "example_fcm_token"
+    },
+    "isBase64Encoded": false
+}

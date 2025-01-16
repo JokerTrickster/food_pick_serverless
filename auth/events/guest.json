@@ -1,0 +1,9 @@
+{
+    "httpMethod": "POST",
+    "path": "/auth/guest",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": null,
+    "isBase64Encoded": false
+}

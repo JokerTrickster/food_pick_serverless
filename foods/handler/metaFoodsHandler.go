@@ -6,6 +6,7 @@ import (
 
 	"net/http"
 
+	_error "github.com/JokerTrickster/common/error"
 	"github.com/labstack/echo/v4"
 )
 
@@ -26,7 +27,7 @@ func (d *MetaFoodHandler) Meta(c echo.Context) error {
 
 	res, err := d.UseCase.Meta(ctx)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 	// 캐시 히트 여부
 	c.Response().Header().Set("X-Cache-Hit", "true")

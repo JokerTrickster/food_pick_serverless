@@ -1,0 +1,10 @@
+{
+    "httpMethod": "POST",
+    "path": "/auth/logout",
+    "headers": {
+        "Content-Type": "application/json",
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMzLCJleHAiOjE3MzY5OTUxMTF9.abc123exampletoken"
+    },
+    "body": null,
+    "isBase64Encoded": false
+}

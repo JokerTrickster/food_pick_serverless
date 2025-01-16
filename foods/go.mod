@@ -3,10 +3,10 @@ module main
 go 1.22.1
 
 require (
-	github.com/JokerTrickster/common v0.0.7
+	github.com/JokerTrickster/common v0.0.13
 	github.com/aws/aws-lambda-go v1.47.0
 	github.com/awslabs/aws-lambda-go-api-proxy v0.16.2
-	github.com/google/generative-ai-go v0.16.0
+	github.com/google/generative-ai-go v0.19.0
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/redis/go-redis/v9 v9.7.0
 	google.golang.org/api v0.216.0
@@ -14,12 +14,12 @@ require (
 )
 
 require (
-	cloud.google.com/go v0.115.0 // indirect
+	cloud.google.com/go v0.117.0 // indirect
 	cloud.google.com/go/ai v0.8.0 // indirect
 	cloud.google.com/go/auth v0.13.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.6 // indirect
 	cloud.google.com/go/compute/metadata v0.6.0 // indirect
-	cloud.google.com/go/longrunning v0.5.7 // indirect
+	cloud.google.com/go/longrunning v0.6.2 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.32.8 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.7 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.28.7 // indirect
@@ -88,7 +88,7 @@ require (
 )
 
 replace (
-	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.7
+	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.13
 	github.com/labstack/echo/v4 => github.com/labstack/echo/v4 v4.12.0
 
 )

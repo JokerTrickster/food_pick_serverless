@@ -1,6 +1,5 @@
 package entity
 
-// sql entity
 type GoogleOauthCallbackSQLQuery struct {
 	Email string `json:"email"`
 }

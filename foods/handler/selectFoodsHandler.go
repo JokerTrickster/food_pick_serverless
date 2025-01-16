@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	_env "github.com/JokerTrickster/common/env"
+	_error "github.com/JokerTrickster/common/error"
 	_jwt "github.com/JokerTrickster/common/jwt"
 	_validator "github.com/JokerTrickster/common/validator"
 	"github.com/labstack/echo/v4"
@@ -29,7 +30,7 @@ func (d *SelectFoodHandler) Select(c echo.Context) error {
 	ctx, uID, _ := _env.CtxGenerate(c)
 	req := &request.ReqSelectFood{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	//business logic
@@ -44,7 +45,7 @@ func (d *SelectFoodHandler) Select(c echo.Context) error {
 
 	res, err := d.UseCase.Select(ctx, e)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, res)

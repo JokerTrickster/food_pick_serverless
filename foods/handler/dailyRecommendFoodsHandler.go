@@ -2,10 +2,11 @@ package handler
 
 import (
 	"context"
-	"log"
 	"net/http"
 
 	_interface "main/model/interface"
+
+	_error "github.com/JokerTrickster/common/error"
 
 	"github.com/labstack/echo/v4"
 )
@@ -28,8 +29,7 @@ func (d *DailyRecommendFoodHandler) DailyRecommend(c echo.Context) error {
 	//business logic
 	res, err := d.UseCase.DailyRecommend(ctx)
 	if err != nil {
-		log.Println(err)
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	// 예제 응답

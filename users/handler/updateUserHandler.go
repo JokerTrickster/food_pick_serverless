@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	_env "github.com/JokerTrickster/common/env"
+	_error "github.com/JokerTrickster/common/error"
 	_jwt "github.com/JokerTrickster/common/jwt"
 	_validator "github.com/JokerTrickster/common/validator"
 
@@ -30,7 +31,7 @@ func (d *UpdateUserHandler) Update(c echo.Context) error {
 	ctx, uID, email := _env.CtxGenerate(c)
 	req := &request.ReqUpdateUser{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	entity := entity.UpdateUserEntity{
@@ -56,7 +57,7 @@ func (d *UpdateUserHandler) Update(c echo.Context) error {
 
 	err := d.UseCase.Update(ctx, &entity)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, true)

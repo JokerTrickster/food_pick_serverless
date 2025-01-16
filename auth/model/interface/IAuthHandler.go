@@ -33,18 +33,10 @@ type IGuestAuthHandler interface {
 	Guest(c echo.Context) error
 }
 
-type IGoogleOauthAuthHandler interface {
-	GoogleOauth(c echo.Context) error
-}
+
+
 type IGoogleOauthCallbackAuthHandler interface {
 	GoogleOauthCallback(c echo.Context) error
-}
-
-type IV02GoogleOauthCallbackAuthHandler interface {
-	V02GoogleOauthCallback(c echo.Context) error
-}
-type IV02GoogleOauthAuthHandler interface {
-	V02GoogleOauth(c echo.Context) error
 }
 
 type IKakaoOauthAuthHandler interface {

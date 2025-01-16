@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	_env "github.com/JokerTrickster/common/env"
+	_error "github.com/JokerTrickster/common/error"
 	_jwt "github.com/JokerTrickster/common/jwt"
 
 	"github.com/labstack/echo/v4"
@@ -27,7 +28,7 @@ func (d *DeleteUserHandler) Delete(c echo.Context) error {
 
 	err := d.UseCase.Delete(ctx, uID)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, true)

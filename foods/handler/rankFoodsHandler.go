@@ -6,6 +6,7 @@ import (
 	_interface "main/model/interface"
 
 	_env "github.com/JokerTrickster/common/env"
+	_error "github.com/JokerTrickster/common/error"
 	"github.com/labstack/echo/v4"
 )
 
@@ -26,7 +27,7 @@ func (d *RankFoodHandler) Rank(c echo.Context) error {
 	//business logic
 	res, err := d.UseCase.Rank(ctx)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, res)

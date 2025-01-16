@@ -1,0 +1,16 @@
+{
+    "httpMethod": "POST",
+    "path": "/auth/signup",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "password": "example_password",
+        "email": "example@example.com",
+        "name": "홍길동",
+        "sex": "male",
+        "birth": "1990-01-01",
+        "authCode": "testCode"
+    },
+    "isBase64Encoded": false
+}

@@ -28,12 +28,12 @@ func (d *GetUserHandler) Get(c echo.Context) error {
 	pathUserID := c.Param("userID")
 	puID, _ := strconv.Atoi(pathUserID)
 	if pathUserID == "" || uID != uint(puID) {
-		return _error.CreateError(ctx, string(_error.ErrBadParameter), _error.Trace(), "invalid user id", string(_error.ErrFromClient))
+		return c.JSON(_error.GenerateCustomErrorResponse(http.StatusBadRequest, string(_error.ErrBadParameter), "invalid user id"))
 	}
 
 	res, err := d.UseCase.Get(ctx, uID)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, res)

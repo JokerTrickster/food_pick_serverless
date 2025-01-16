@@ -8,6 +8,7 @@ import (
 	_interface "main/model/interface"
 
 	_env "github.com/JokerTrickster/common/env"
+	_error "github.com/JokerTrickster/common/error"
 	_jwt "github.com/JokerTrickster/common/jwt"
 	_validator "github.com/JokerTrickster/common/validator"
 
@@ -31,7 +32,7 @@ func (d *RecommendFoodHandler) Recommend(c echo.Context) error {
 	ctx, uID, _ := _env.CtxGenerate(c)
 	req := &request.ReqRecommendFood{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 
 	//business logic
@@ -48,7 +49,7 @@ func (d *RecommendFoodHandler) Recommend(c echo.Context) error {
 
 	res, err := d.UseCase.Recommend(ctx, entity)
 	if err != nil {
-		return err
+		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
 	return writeCustomJSON(c, http.StatusOK, res)
 }
