@@ -20,7 +20,7 @@ func NewGoogleOauthCallbackAuthHandler(c *echo.Echo, useCase _interface.IGoogleO
 	handler := &GoogleOauthCallbackAuthHandler{
 		UseCase: useCase,
 	}
-	c.GET("/v0.2/auth/google/callback", handler.GoogleOauthCallback)
+	c.GET("/auth/google/callback", handler.GoogleOauthCallback)
 	return handler
 }
 
