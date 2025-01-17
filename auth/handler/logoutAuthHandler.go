@@ -18,7 +18,7 @@ func NewLogoutAuthHandler(c *echo.Echo, useCase _interface.ILogoutAuthUseCase) _
 	handler := &LogoutAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/logout", _jwt.TokenChecker(handler.Logout))
+	c.POST("/v0.1/auth/logout", _jwt.TokenChecker(handler.Logout))
 	return handler
 }
 

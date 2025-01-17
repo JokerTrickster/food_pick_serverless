@@ -32,8 +32,6 @@ github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0.48.1/go.mod h1:0wEl7vrAD8mehJyohS9HZy+WyEOaQO2mJx86Cvh93kM=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.48.1 h1:8nn+rsCvTq9axyEh382S0PFLBeaFwNsT43IrPWzctRU=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.48.1/go.mod h1:viRWSEhtMZqz1rhwmOVKkWl6SwmVowfL9O2YR5gI2PE=
-github.com/JokerTrickster/common v0.0.9 h1:ihWvVJ5iYdcZL2nTVVgsbyru0c3JtPoO1NOo7XDMvt0=
-github.com/JokerTrickster/common v0.0.9/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
 github.com/JokerTrickster/common v0.0.13 h1:IyAH9KrJjzseDfOKzlaF8uoTjcWTCLTZXgCgHe1PwDo=
 github.com/JokerTrickster/common v0.0.13/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
 github.com/aws/aws-lambda-go v1.47.0 h1:0H8s0vumYx/YKs4sE7YM0ktwL2eWse+kfopsRI1sXVI=

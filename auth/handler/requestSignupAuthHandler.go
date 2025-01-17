@@ -20,7 +20,7 @@ func NewRequestSignupAuthHandler(c *echo.Echo, useCase _interface.IRequestSignup
 	handler := &RequestSignupAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/signup/request", handler.RequestSignup)
+	c.POST("/v0.1/auth/signup/request", handler.RequestSignup)
 	return handler
 }
 

@@ -19,7 +19,7 @@ func NewSigninAuthHandler(c *echo.Echo, useCase _interface.ISigninAuthUseCase) _
 	handler := &SigninAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/signin", handler.Signin)
+	c.POST("/v0.1/auth/signin", handler.Signin)
 	return handler
 }
 

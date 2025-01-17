@@ -23,12 +23,14 @@ import (
 
 var echoLambda *echoadapter.EchoLambda
 
+//export PATH=$PATH:~/go/bin
 func main() {
 	// 서버 초기화
 	InitServer()
 
 	//  핸들러 등록
 	InitHandler()
+
 	lambda.Start(echoLambda.Proxy)
 }
 
@@ -42,10 +44,21 @@ func InitHandler() {
 	// 레디스 초기화
 	redisService := _redis.GetRedisService()
 	redis, _ := redisService.GetClient(context.Background())
-	fmt.Println(redis)
 
 	// 핸들러 등록
 	handler.NewCheckEmailAuthHandler(e, usecase.NewCheckEmailAuthUseCase(repository.NewCheckEmailAuthRepository(db), 10*time.Second))
+	handler.NewGoogleOauthCallbackAuthHandler(e, usecase.NewGoogleOauthCallbackAuthUseCase(repository.NewGoogleOauthCallbackAuthRepository(db), 10*time.Second))
+	handler.NewGuestAuthHandler(e, usecase.NewGuestAuthUseCase(repository.NewGuestAuthRepository(db, redis), 10*time.Second))
+	handler.NewKakaoOauthAuthHandler(e, usecase.NewKakaoOauthAuthUseCase(repository.NewKakaoOauthAuthRepository(db), 10*time.Second))
+	handler.NewLogoutAuthHandler(e, usecase.NewLogoutAuthUseCase(repository.NewLogoutAuthRepository(db), 10*time.Second))
+	handler.NewReissueAuthHandler(e, usecase.NewReissueAuthUseCase(repository.NewReissueAuthRepository(db), 10*time.Second))
+	handler.NewRequestPasswordAuthHandler(e, usecase.NewRequestPasswordAuthUseCase(repository.NewRequestPasswordAuthRepository(db), 10*time.Second))
+	handler.NewRequestSignupAuthHandler(e, usecase.NewRequestSignupAuthUseCase(repository.NewRequestSignupAuthRepository(db), 10*time.Second))
+	handler.NewSaveFCMTokenAuthHandler(e, usecase.NewSaveFCMTokenAuthUseCase(repository.NewSaveFCMTokenAuthRepository(db), 10*time.Second))
+	handler.NewSigninAuthHandler(e, usecase.NewSigninAuthUseCase(repository.NewSigninAuthRepository(db), 10*time.Second))
+	handler.NewSignupAuthHandler(e, usecase.NewSignupAuthUseCase(repository.NewSignupAuthRepository(db), 10*time.Second))
+	handler.NewValidatePasswordAuthHandler(e, usecase.NewValidatePasswordAuthUseCase(repository.NewValidatePasswordAuthRepository(db), 10*time.Second))
+
 	// Echo Lambda 어댑터 초기화
 	echoLambda = echoadapter.New(e)
 }

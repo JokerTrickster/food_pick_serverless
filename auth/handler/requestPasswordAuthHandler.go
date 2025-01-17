@@ -20,7 +20,7 @@ func NewRequestPasswordAuthHandler(c *echo.Echo, useCase _interface.IRequestPass
 	handler := &RequestPasswordAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/password/request", handler.RequestPassword)
+	c.POST("/v0.1/auth/password/request", handler.RequestPassword)
 	return handler
 }
 

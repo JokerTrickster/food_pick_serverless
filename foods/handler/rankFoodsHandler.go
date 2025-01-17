@@ -18,7 +18,7 @@ func NewRankFoodHandler(c *echo.Echo, useCase _interface.IRankFoodUseCase) _inte
 	handler := &RankFoodHandler{
 		UseCase: useCase,
 	}
-	c.GET("/foods/rank", handler.Rank)
+	c.GET("/v0.1/foods/rank", handler.Rank)
 	return handler
 }
 

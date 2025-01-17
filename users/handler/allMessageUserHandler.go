@@ -20,7 +20,7 @@ func NewAllMessageUserHandler(c *echo.Echo, useCase _interface.IAllMessageUserUs
 	handler := &AllMessageUserHandler{
 		UseCase: useCase,
 	}
-	c.POST("/users/message/all", handler.AllMessage)
+	c.POST("/v0.1/users/message/all", handler.AllMessage)
 	return handler
 }
 

@@ -19,7 +19,7 @@ func NewGetUserHandler(c *echo.Echo, useCase _interface.IGetUserUseCase) _interf
 	handler := &GetUserHandler{
 		UseCase: useCase,
 	}
-	c.GET("/users/:userID", _jwt.TokenChecker(handler.Get))
+	c.GET("/v0.1/users/:userID", _jwt.TokenChecker(handler.Get))
 	return handler
 }
 

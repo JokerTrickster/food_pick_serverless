@@ -19,7 +19,7 @@ func NewDeleteUserHandler(c *echo.Echo, useCase _interface.IDeleteUserUseCase) _
 	handler := &DeleteUserHandler{
 		UseCase: useCase,
 	}
-	c.DELETE("/users", _jwt.TokenChecker(handler.Delete))
+	c.DELETE("/v0.1/users", _jwt.TokenChecker(handler.Delete))
 	return handler
 }
 

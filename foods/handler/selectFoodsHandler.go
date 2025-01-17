@@ -22,7 +22,7 @@ func NewSelectFoodHandler(c *echo.Echo, useCase _interface.ISelectFoodUseCase) _
 	handler := &SelectFoodHandler{
 		UseCase: useCase,
 	}
-	c.POST("/foods/select", _jwt.TokenChecker(handler.Select))
+	c.POST("/v0.1/foods/select", _jwt.TokenChecker(handler.Select))
 	return handler
 }
 

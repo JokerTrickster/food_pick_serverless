@@ -49,6 +49,15 @@ Resources:
                   - "ec2:DescribeNetworkInterfaces"
                   - "ec2:DeleteNetworkInterface"
                 Resource: "*"
+        - PolicyName: AllowS3Access  # S3 액세스 권한 추가
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "s3:*"  # 객체 읽기 권한
+                Resource:
+                  - "*"           # S3 버킷
   ### API Gateway ###
   ApiGateway:
     Type: AWS::Serverless::Api
@@ -69,37 +78,37 @@ Resources:
         GetUser:
           Type: Api
           Properties:
-            Path: /users/{userID}
+            Path: /v0.1/users/{userID}
             Method: GET
             RestApiId: !Ref ApiGateway
         DeleteUser:
           Type: Api
           Properties:
-            Path: /users
+            Path: /v0.1/users
             Method: DELETE
             RestApiId: !Ref ApiGateway
         UpdateUserProfile:
           Type: Api
           Properties:
-            Path: /users/profile
+            Path: /v0.1/users/profile
             Method: PUT
             RestApiId: !Ref ApiGateway
         UpdateUserProfileImage:
           Type: Api
           Properties:
-            Path: /users/profiles/image
+            Path: /v0.1/users/profiles/image
             Method: POST
             RestApiId: !Ref ApiGateway
         MessageUser:
           Type: Api
           Properties:
-            Path: /users/message
+            Path: /v0.1/users/message
             Method: POST
             RestApiId: !Ref ApiGateway
         AllMessageUser:
           Type: Api
           Properties:
-            Path: /users/message/all
+            Path: /v0.1/users/message/all
             Method: POST
             RestApiId: !Ref ApiGateway
 
@@ -113,31 +122,31 @@ Resources:
         RecommendFoods:
           Type: Api
           Properties:
-            Path: /foods/recommend
+            Path: /v0.1/foods/recommend
             Method: POST
             RestApiId: !Ref ApiGateway
         DailyRecommendFoods:
           Type: Api
           Properties:
-            Path: /foods/daily-recommend
+            Path: /v0.1/foods/daily-recommend
             Method: GET
             RestApiId: !Ref ApiGateway
         MetaFoods:
           Type: Api
           Properties:
-            Path: /foods/meta
+            Path: /v0.1/foods/meta
             Method: GET
             RestApiId: !Ref ApiGateway
         RankFoods:
           Type: Api
           Properties:
-            Path: /foods/rank
+            Path: /v0.1/foods/rank
             Method: GET
             RestApiId: !Ref ApiGateway
         SelectFoods:
           Type: Api
           Properties:
-            Path: /foods/select
+            Path: /v0.1/foods/select
             Method: POST
             RestApiId: !Ref ApiGateway
 
@@ -151,73 +160,73 @@ Resources:
         CheckEmailAuth:
           Type: Api
           Properties:
-            Path: /auth/email/check
+            Path: /v0.1/auth/email/check
             Method: GET
             RestApiId: !Ref ApiGateway
         GuestAuth:
           Type: Api
           Properties:
-            Path: /auth/guest
+            Path: /v0.1/auth/guest
             Method: POST
             RestApiId: !Ref ApiGateway
         LogoutAuth:
           Type: Api
           Properties:
-            Path: /auth/logout
+            Path: /v0.1/auth/logout
             Method: POST
             RestApiId: !Ref ApiGateway
         ReissueAuth:
           Type: Api
           Properties:
-            Path: /auth/token/reissue
+            Path: /v0.1/auth/token/reissue
             Method: PUT
             RestApiId: !Ref ApiGateway
         RequestPasswordAuth:
           Type: Api
           Properties:
-            Path: /auth/password/request
+            Path: /v0.1/auth/password/request
             Method: POST
             RestApiId: !Ref ApiGateway
         RequestSignupAuth:
           Type: Api
           Properties:
-            Path: /auth/signup/request
+            Path: /v0.1/auth/signup/request
             Method: POST
             RestApiId: !Ref ApiGateway
         SaveFCMTokenAuth:
           Type: Api
           Properties:
-            Path: /auth/fcm/token
+            Path: /v0.1/auth/fcm/token
             Method: POST
             RestApiId: !Ref ApiGateway
         SigninAuth:
           Type: Api
           Properties:
-            Path: /auth/signin
+            Path: /v0.1/auth/signin
             Method: POST
             RestApiId: !Ref ApiGateway
         SignupAuth:
           Type: Api
           Properties:
-            Path: /auth/signup
+            Path: /v0.1/auth/signup
             Method: POST
             RestApiId: !Ref ApiGateway
         ValidatePasswordAuth:
           Type: Api
           Properties:
-            Path: /auth/password/validate
+            Path: /v0.1/auth/password/validate
             Method: POST
             RestApiId: !Ref ApiGateway
         KakaoOauth:
           Type: Api
           Properties:
-            Path: /auth/kakao
+            Path: /v0.1/auth/kakao
             Method: POST
             RestApiId: !Ref ApiGateway
         GoogleOauthCallback:
           Type: Api
           Properties:
-            Path: /auth/google/callback
+            Path: /v0.1/auth/google/callback
             Method: GET
             RestApiId: !Ref ApiGateway
 Outputs:

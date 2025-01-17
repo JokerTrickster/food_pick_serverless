@@ -19,7 +19,7 @@ func NewReissueAuthHandler(c *echo.Echo, useCase _interface.IReissueAuthUseCase)
 	handler := &ReissueAuthHandler{
 		UseCase: useCase,
 	}
-	c.PUT("/auth/token/reissue", handler.Reissue)
+	c.PUT("/v0.1/auth/token/reissue", handler.Reissue)
 	return handler
 }
 

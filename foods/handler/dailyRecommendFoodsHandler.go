@@ -19,7 +19,7 @@ func NewDailyRecommendFoodHandler(c *echo.Echo, useCase _interface.IDailyRecomme
 	handler := &DailyRecommendFoodHandler{
 		UseCase: useCase,
 	}
-	c.GET("/foods/daily-recommend", handler.DailyRecommend)
+	c.GET("/v0.1/foods/daily-recommend", handler.DailyRecommend)
 	return handler
 }
 

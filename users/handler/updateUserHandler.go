@@ -23,7 +23,7 @@ func NewUpdateUserHandler(c *echo.Echo, useCase _interface.IUpdateUserUseCase) _
 	handler := &UpdateUserHandler{
 		UseCase: useCase,
 	}
-	c.PUT("/users/profile", _jwt.TokenChecker(handler.Update))
+	c.PUT("/v0.1/users/profile", _jwt.TokenChecker(handler.Update))
 	return handler
 }
 

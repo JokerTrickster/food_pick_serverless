@@ -20,7 +20,7 @@ func NewUpdateProfileUserHandler(c *echo.Echo, useCase _interface.IUpdateProfile
 	handler := &UpdateProfileUserHandler{
 		UseCase: useCase,
 	}
-	c.POST("/users/profiles/image", _jwt.TokenChecker(handler.UpdateProfile))
+	c.POST("/v0.1/users/profiles/image", _jwt.TokenChecker(handler.UpdateProfile))
 	return handler
 }
 

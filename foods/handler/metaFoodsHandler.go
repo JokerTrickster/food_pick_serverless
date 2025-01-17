@@ -18,7 +18,7 @@ func NewMetaFoodHandler(c *echo.Echo, useCase _interface.IMetaFoodUseCase) _inte
 	handler := &MetaFoodHandler{
 		UseCase: useCase,
 	}
-	c.GET("/foods/meta", handler.Meta)
+	c.GET("/v0.1/foods/meta", handler.Meta)
 	return handler
 }
 

@@ -20,7 +20,7 @@ func NewValidatePasswordAuthHandler(c *echo.Echo, useCase _interface.IValidatePa
 	handler := &ValidatePasswordAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/password/validate", handler.ValidatePassword)
+	c.POST("/v0.1/auth/password/validate", handler.ValidatePassword)
 	return handler
 }
 

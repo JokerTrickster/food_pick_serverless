@@ -19,7 +19,7 @@ func NewKakaoOauthAuthHandler(c *echo.Echo, useCase _interface.IKakaoOauthAuthUs
 	handler := &KakaoOauthAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/kakao", handler.KakaoOauth)
+	c.POST("/v0.1/auth/kakao", handler.KakaoOauth)
 	return handler
 }
 

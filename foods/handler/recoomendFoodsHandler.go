@@ -23,7 +23,7 @@ func NewRecommendFoodHandler(c *echo.Echo, useCase _interface.IRecommendFoodUseC
 	handler := &RecommendFoodHandler{
 		UseCase: useCase,
 	}
-	c.POST("/foods/recommend", _jwt.TokenChecker(handler.Recommend))
+	c.POST("/v0.1/foods/recommend", _jwt.TokenChecker(handler.Recommend))
 	return handler
 }
 

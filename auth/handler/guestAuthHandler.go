@@ -18,7 +18,7 @@ func NewGuestAuthHandler(c *echo.Echo, useCase _interface.IGuestAuthUseCase) _in
 	handler := &GuestAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/guest", handler.Guest)
+	c.POST("/v0.1/auth/guest", handler.Guest)
 	return handler
 }
 

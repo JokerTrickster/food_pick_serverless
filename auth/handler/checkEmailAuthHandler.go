@@ -19,7 +19,7 @@ func NewCheckEmailAuthHandler(c *echo.Echo, useCase _interface.ICheckEmailAuthUs
 	handler := &CheckEmailAuthHandler{
 		UseCase: useCase,
 	}
-	c.GET("/auth/email/check", handler.CheckEmail)
+	c.GET("/v0.1/auth/email/check", handler.CheckEmail)
 	return handler
 }
 

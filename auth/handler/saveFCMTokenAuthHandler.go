@@ -20,7 +20,7 @@ func NewSaveFCMTokenAuthHandler(c *echo.Echo, useCase _interface.ISaveFCMTokenAu
 	handler := &SaveFCMTokenAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/auth/fcm/token", _jwt.TokenChecker(handler.SaveFCMToken))
+	c.POST("/v0.1/auth/fcm/token", _jwt.TokenChecker(handler.SaveFCMToken))
 	return handler
 }
 
