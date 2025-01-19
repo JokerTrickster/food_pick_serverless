@@ -58,6 +58,15 @@ Resources:
                   - "s3:*"  # 객체 읽기 권한
                 Resource:
                   - "*"           # S3 버킷
+        - PolicyName: AllowCloudWatchLogs  # CloudWatch Logs 권한 추가
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "logs:*"
+                Resource:
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*"
   ### API Gateway ###
   ApiGateway:
     Type: AWS::Serverless::Api
