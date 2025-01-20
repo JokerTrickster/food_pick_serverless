@@ -34,6 +34,16 @@ github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapp
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.48.1/go.mod h1:viRWSEhtMZqz1rhwmOVKkWl6SwmVowfL9O2YR5gI2PE=
 github.com/JokerTrickster/common v0.0.13 h1:IyAH9KrJjzseDfOKzlaF8uoTjcWTCLTZXgCgHe1PwDo=
 github.com/JokerTrickster/common v0.0.13/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
+github.com/JokerTrickster/common v0.0.16 h1:Z9U+ZLOWCL4Hi80TiTmllqUl+DU5kJXmApefoRyCIGk=
+github.com/JokerTrickster/common v0.0.16/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
+github.com/JokerTrickster/common v0.0.17 h1:/xaXjNNDEvK/pDRiRMmxb/j75iw1oOgq4AoU9igNOhU=
+github.com/JokerTrickster/common v0.0.17/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
+github.com/JokerTrickster/common v0.0.26 h1:msAtlxau6sj+DMU7csNpmtHVckirn6azdcZ6hPu0Ubc=
+github.com/JokerTrickster/common v0.0.26/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
+github.com/JokerTrickster/common v0.0.27 h1:aUdB+6j86i1zibPpNXZBAVrG91i6ppECBZMfgdn7DQg=
+github.com/JokerTrickster/common v0.0.27/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
+github.com/JokerTrickster/common v0.0.28 h1:e3szzk/gobCGlNjqHMpmQxNZpYcx67w7X4GZQVMYVFo=
+github.com/JokerTrickster/common v0.0.28/go.mod h1:foQhr5lEJ9LZj2tP6gEMNO+ErCeL6sgY8oFoj3omY30=
 github.com/aws/aws-lambda-go v1.47.0 h1:0H8s0vumYx/YKs4sE7YM0ktwL2eWse+kfopsRI1sXVI=
 github.com/aws/aws-lambda-go v1.47.0/go.mod h1:dpMpZgvWx5vuQJfBt0zqBha60q7Dd7RfgJv23DymV8A=
 github.com/aws/aws-sdk-go-v2 v1.32.8 h1:cZV+NUS/eGxKXMtmyhtYPJ7Z4YLoI/V8bkTdRZfYhGo=

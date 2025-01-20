@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	_interface "main/model/interface"
+	"time"
 
 	_mysql "github.com/JokerTrickster/common/db/mysql"
 	_error "github.com/JokerTrickster/common/error"
@@ -52,7 +53,7 @@ func (g *GuestAuthRepository) RedisFindOneGuest(ctx context.Context, key string)
 
 func (g *GuestAuthRepository) RedisSetOneGuest(ctx context.Context, key string, data []byte) error {
 	// redis에 key로 data 저장
-	err := g.RedisClient.Set(ctx, key, data, 0).Err()
+	err := g.RedisClient.Set(ctx, key, data, 50*time.Minute).Err()
 	if err != nil {
 		return _error.CreateError(ctx, string(_error.ErrInternalServer), _error.Trace(), _error.HandleError(err.Error(), key), string(_error.ErrFromRedis))
 	}

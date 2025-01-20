@@ -13,12 +13,15 @@ import (
 	_mysql "github.com/JokerTrickster/common/db/mysql"
 	_redis "github.com/JokerTrickster/common/db/redis"
 	_jwt "github.com/JokerTrickster/common/jwt"
+	_logging "github.com/JokerTrickster/common/logging"
+	_middleware "github.com/JokerTrickster/common/middleware"
 	"github.com/aws/aws-lambda-go/lambda"
 	echoadapter "github.com/awslabs/aws-lambda-go-api-proxy/echo"
 	"github.com/labstack/echo/v4"
 )
 
 var echoLambda *echoadapter.EchoLambda
+var logger *_logging.Logger
 
 func main() {
 	// Foods 서버 초기화
@@ -31,7 +34,10 @@ func main() {
 
 func InitHandler() {
 	e := echo.New()
-
+	// 미들 웨어 초기화
+	logger = _logging.NewLogger("food-pick", "dev")
+	e.Use(_middleware.LoggingMiddleware(logger))
+	e.Use(_middleware.CORSConfig())
 	// DB 초기화
 	mysqlService := _mysql.GetMySQLService()
 
@@ -45,7 +51,7 @@ func InitHandler() {
 	handler.NewRecommendFoodHandler(e, usecase.NewRecommendFoodUseCase(repository.NewRecommendFoodRepository(db), 10*time.Second))
 	handler.NewRankFoodHandler(e, usecase.NewRankFoodUseCase(repository.NewRankFoodRepository(db, redis), 10*time.Second))
 	handler.NewSelectFoodHandler(e, usecase.NewSelectFoodUseCase(repository.NewSelectFoodRepository(db, redis), 10*time.Second))
-	handler.NewMetaFoodHandler(e, usecase.NewMetaFoodUseCase(repository.NewMetaFoodRepository(db,redis), 10*time.Second))
+	handler.NewMetaFoodHandler(e, usecase.NewMetaFoodUseCase(repository.NewMetaFoodRepository(db, redis), 10*time.Second))
 	// Echo Lambda 어댑터 초기화
 	echoLambda = echoadapter.New(e)
 }
@@ -123,7 +129,6 @@ func InitializeDatabase(ctx context.Context) string {
 
 	// Format the MySQL connection string
 	connectionString := formatConnectionString(dbParams)
-	fmt.Println(connectionString)
 	// Initialize MySQL service
 	mysqlService := _mysql.GetMySQLService()
 	if err := mysqlService.Initialize(ctx, connectionString); err != nil {

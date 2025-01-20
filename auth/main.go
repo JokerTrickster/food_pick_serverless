@@ -14,6 +14,8 @@ import (
 	_redis "github.com/JokerTrickster/common/db/redis"
 	_firebase "github.com/JokerTrickster/common/firebase"
 	_jwt "github.com/JokerTrickster/common/jwt"
+	_logging "github.com/JokerTrickster/common/logging"
+	_middleware "github.com/JokerTrickster/common/middleware"
 	_google "github.com/JokerTrickster/common/oauth/google"
 	_kakao "github.com/JokerTrickster/common/oauth/kakao"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -22,6 +24,7 @@ import (
 )
 
 var echoLambda *echoadapter.EchoLambda
+var logger *_logging.Logger
 
 //export PATH=$PATH:~/go/bin
 func main() {
@@ -37,6 +40,10 @@ func main() {
 func InitHandler() {
 	e := echo.New()
 
+	// 미들 웨어 초기화
+	logger = _logging.NewLogger("food-pick", "dev")
+	e.Use(_middleware.LoggingMiddleware(logger))
+	e.Use(_middleware.CORSConfig())
 	// DB 초기화
 	mysqlService := _mysql.GetMySQLService()
 

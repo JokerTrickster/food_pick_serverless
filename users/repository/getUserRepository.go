@@ -14,7 +14,6 @@ func NewGetUserRepository(gormDB *gorm.DB) _interface.IGetUserRepository {
 	return &GetUserRepository{GormDB: gormDB}
 }
 func (d *GetUserRepository) FindOneUser(ctx context.Context, uID uint) (*_mysql.Users, error) {
-
 	user := _mysql.Users{}
 	result := d.GormDB.Model(&user).Where("id = ?", uID).First(&user)
 	if result.Error != nil {
