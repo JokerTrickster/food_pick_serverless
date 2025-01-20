@@ -1,14 +1,14 @@
 {
     "httpMethod": "GET",
-    "path": "/users/33",
+    "path": "/v0.1/users/3",
     "headers": {
         "Content-Type": "application/json",
-        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNzM2OTE1MTU0MDI5LCJ1c2VySUQiOjMzLCJlbWFpbCI6InJ5YW5AZ21haWwuY29tIiwiZXhwIjoxNzM3MDAxNTU0fQ.V98rzPkMDYi4AObPHkjKc3NpWaxqS5U5gc695ZeL2Tw"
+        "tkn": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoxNzM3Mjk0NTgyLCJ1c2VySUQiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTczNzM4MDk4Mn0.yp4D_KTjCOiL2X0gAaMeyKdLw7JObacM3U_DcJVI1Sg"
     },
     "queryStringParameters": null,
     "multiValueQueryStringParameters": null,
     "pathParameters": {
-        "userID": "33"
+        "userID": "3"
     },
     "body": null
 }

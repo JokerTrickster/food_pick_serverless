@@ -14,12 +14,15 @@ import (
 	_redis "github.com/JokerTrickster/common/db/redis"
 	_firebase "github.com/JokerTrickster/common/firebase"
 	_jwt "github.com/JokerTrickster/common/jwt"
+	_logging "github.com/JokerTrickster/common/logging"
+	_middleware "github.com/JokerTrickster/common/middleware"
 	"github.com/aws/aws-lambda-go/lambda"
 	echoadapter "github.com/awslabs/aws-lambda-go-api-proxy/echo"
 	"github.com/labstack/echo/v4"
 )
 
 var echoLambda *echoadapter.EchoLambda
+var logger *_logging.Logger
 
 func main() {
 	// Foods 서버 초기화
@@ -32,7 +35,10 @@ func main() {
 
 func InitHandler() {
 	e := echo.New()
-
+	// 미들 웨어 초기화
+	logger = _logging.NewLogger("food-pick", "dev")
+	e.Use(_middleware.LoggingMiddleware(logger))
+	e.Use(_middleware.CORSConfig())
 	// DB 초기화
 	mysqlService := _mysql.GetMySQLService()
 

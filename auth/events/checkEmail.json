@@ -1,6 +1,6 @@
 {
     "httpMethod": "GET",
-    "path": "/auth/email/check",
+    "path": "/v0.1/auth/email/check",
     "queryStringParameters": {
         "email": "ryan@gmail.com"
     },

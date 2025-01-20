@@ -3,7 +3,7 @@ module main
 go 1.22.1
 
 require (
-	github.com/JokerTrickster/common v0.0.13
+	github.com/JokerTrickster/common v0.0.28
 	github.com/aws/aws-lambda-go v1.47.0
 	github.com/awslabs/aws-lambda-go-api-proxy v0.16.2
 	github.com/labstack/echo/v4 v4.12.0
@@ -116,4 +116,9 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/mysql v1.5.7 // indirect
+)
+
+replace (
+	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.28
+	github.com/labstack/echo/v4 => github.com/labstack/echo/v4 v4.12.0
 )

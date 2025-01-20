@@ -4,7 +4,7 @@ go 1.22.1
 
 require (
 	firebase.google.com/go v3.13.0+incompatible
-	github.com/JokerTrickster/common v0.0.13
+	github.com/JokerTrickster/common v0.0.28
 	github.com/aws/aws-lambda-go v1.47.0
 	github.com/awslabs/aws-lambda-go-api-proxy v0.16.2
 	github.com/labstack/echo/v4 v4.13.3
@@ -105,7 +105,6 @@ require (
 )
 
 replace (
-	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.13
+	github.com/JokerTrickster/common => github.com/JokerTrickster/common v0.0.28
 	github.com/labstack/echo/v4 => github.com/labstack/echo/v4 v4.12.0
-
 )

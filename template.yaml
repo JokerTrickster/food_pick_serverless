@@ -17,6 +17,24 @@ Globals:
         - subnet-00bd54fe53b26180d
 
 Resources:
+  ### 고정 CloudWatch Log Group 생성 ###
+  FoodPickUsersLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/food-pick-UsersFunction # UsersFunction 로그 그룹 이름
+      RetentionInDays: 14 # 로그 보관 기간
+
+  FoodPickFoodsLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/food-pick-FoodsFunction # FoodsFunction 로그 그룹 이름
+      RetentionInDays: 14 # 로그 보관 기간
+
+  FoodPickAuthLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/food-pick-AuthFunction # AuthFunction 로그 그룹 이름
+      RetentionInDays: 14 # 로그 보관 기간
   ### 공통 IAM Role 생성 ###
   LambdaExecutionRole:
     Type: AWS::IAM::Role
@@ -58,15 +76,18 @@ Resources:
                   - "s3:*"  # 객체 읽기 권한
                 Resource:
                   - "*"           # S3 버킷
-        - PolicyName: AllowCloudWatchLogs  # CloudWatch Logs 권한 추가
+        - PolicyName: ApiGatewayCloudWatchLogsPolicy  # CloudWatch Logs 권한 추가
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
                 Action:
                   - "logs:*"
-                Resource:
-                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*"
+                Resource: 
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/food-pick-UsersFunction:*"
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/food-pick-FoodsFunction:*"
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/food-pick-AuthFunction:*"
+
   ### API Gateway ###
   ApiGateway:
     Type: AWS::Serverless::Api
@@ -81,8 +102,12 @@ Resources:
   UsersFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: food-pick-UsersFunction # 고정된 함수 이름
       CodeUri: ./users/
       Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          LOG_GROUP_NAME: /aws/lambda/food-pick-UsersFunction # 고정 로그 그룹 이름 전달
       Events:
         GetUser:
           Type: Api
@@ -125,8 +150,12 @@ Resources:
   FoodsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: food-pick-FoodsFunction # 고정된 함수 이름
       CodeUri: ./foods/
       Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          LOG_GROUP_NAME: /aws/lambda/food-pick-FoodsFunction # 고정 로그 그룹 이름 전달
       Events:
         RecommendFoods:
           Type: Api
@@ -163,8 +192,12 @@ Resources:
   AuthFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: food-pick-AuthFunction # 고정된 함수 이름
       CodeUri: ./auth/
       Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          LOG_GROUP_NAME: /aws/lambda/food-pick-AuthFunction # 고정 로그 그룹 이름 전달
       Events:
         CheckEmailAuth:
           Type: Api
@@ -238,6 +271,7 @@ Resources:
             Path: /v0.1/auth/google/callback
             Method: GET
             RestApiId: !Ref ApiGateway
+
 Outputs:
   ApiUrl:
     Description: "API Gateway URL"

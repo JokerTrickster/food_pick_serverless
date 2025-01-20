@@ -15,6 +15,21 @@ Globals:
       - subnet-017c0de3d874cab7e
       - subnet-00bd54fe53b26180d
 Resources:
+  FoodPickUsersLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/food-pick-UsersFunction
+      RetentionInDays: 14
+  FoodPickFoodsLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/food-pick-FoodsFunction
+      RetentionInDays: 14
+  FoodPickAuthLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/food-pick-AuthFunction
+      RetentionInDays: 14
   LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -55,7 +70,7 @@ Resources:
             - s3:*
             Resource:
             - '*'
-      - PolicyName: AllowCloudWatchLogs
+      - PolicyName: ApiGatewayCloudWatchLogsPolicy
         PolicyDocument:
           Version: '2012-10-17'
           Statement:
@@ -63,7 +78,9 @@ Resources:
             Action:
             - logs:*
             Resource:
-            - Fn::Sub: arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*
+            - Fn::Sub: arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/food-pick-UsersFunction:*
+            - Fn::Sub: arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/food-pick-FoodsFunction:*
+            - Fn::Sub: arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/food-pick-AuthFunction:*
   ApiGateway:
     Type: AWS::Serverless::Api
     Properties:
@@ -75,11 +92,15 @@ Resources:
   UsersFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: food-pick-UsersFunction
       CodeUri: UsersFunction
       Role:
         Fn::GetAtt:
         - LambdaExecutionRole
         - Arn
+      Environment:
+        Variables:
+          LOG_GROUP_NAME: /aws/lambda/food-pick-UsersFunction
       Events:
         GetUser:
           Type: Api
@@ -128,11 +149,15 @@ Resources:
   FoodsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: food-pick-FoodsFunction
       CodeUri: FoodsFunction
       Role:
         Fn::GetAtt:
         - LambdaExecutionRole
         - Arn
+      Environment:
+        Variables:
+          LOG_GROUP_NAME: /aws/lambda/food-pick-FoodsFunction
       Events:
         RecommendFoods:
           Type: Api
@@ -174,11 +199,15 @@ Resources:
   AuthFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: food-pick-AuthFunction
       CodeUri: AuthFunction
       Role:
         Fn::GetAtt:
         - LambdaExecutionRole
         - Arn
+      Environment:
+        Variables:
+          LOG_GROUP_NAME: /aws/lambda/food-pick-AuthFunction
       Events:
         CheckEmailAuth:
           Type: Api
