@@ -38,16 +38,19 @@ func (g *RankFoodRepository) RankTop(ctx context.Context) ([]*entity.RankFoodRed
 }
 
 func (g *RankFoodRepository) FindRankFoodHistories(ctx context.Context) ([]*entity.RankFoodRedis, error) {
-	// gorm에서 food_histories 테이블에서 top 10가져오기
+	// gorm에서 food_histories 테이블에서 top 10 가져오기
 	var results []struct {
-		name  string
+		Name  string
 		Count int64
 	}
-	// SQL 쿼리 실행
-	err := g.GormDB.Table("food_histories").
-		Select("name, COUNT(name) as count").
-		Group("name").
+
+	// SQL 쿼리 실행: food_histories에서 food_id 기준으로 그룹화하고, foods 테이블과 조인하여 name 가져오기
+	err := g.GormDB.Table("food_histories fh").
+		Select("f.name, COUNT(fh.food_id) as count").
+		Joins("JOIN foods f ON fh.food_id = f.id").
+		Group("fh.food_id, f.name").
 		Order("count DESC").
+		Limit(10).
 		Scan(&results).Error
 
 	if err != nil {
@@ -58,7 +61,7 @@ func (g *RankFoodRepository) FindRankFoodHistories(ctx context.Context) ([]*enti
 	topFoods := make([]*entity.RankFoodRedis, 0)
 	for _, r := range results {
 		topFoods = append(topFoods, &entity.RankFoodRedis{
-			Name:  r.name,
+			Name:  r.Name,
 			Score: float64(r.Count),
 		})
 	}
