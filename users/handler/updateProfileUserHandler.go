@@ -28,7 +28,9 @@ func (d *UpdateProfileUserHandler) UpdateProfile(c echo.Context) error {
 	ctx, uID, _ := _env.CtxGenerate(c)
 	file, err := c.FormFile("image")
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	e := &entity.UpdateProfileUserEntity{
 		UserID: uID,
@@ -36,7 +38,9 @@ func (d *UpdateProfileUserHandler) UpdateProfile(c echo.Context) error {
 	}
 	res, err := d.UseCase.UpdateProfile(ctx, e)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	return c.JSON(http.StatusOK, res)

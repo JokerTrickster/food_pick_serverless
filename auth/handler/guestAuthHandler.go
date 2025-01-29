@@ -28,7 +28,9 @@ func (d *GuestAuthHandler) Guest(c echo.Context) error {
 
 	res, err := d.UseCase.Guest(ctx)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	c.Response().Header().Set("X-Cache-Hit", "true")
 	return c.JSON(http.StatusOK, res)

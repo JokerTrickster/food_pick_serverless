@@ -27,11 +27,15 @@ func (d *KakaoOauthAuthHandler) KakaoOauth(c echo.Context) error {
 	ctx := context.Background()
 	req := &request.ReqKakaoOauth{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	res, err := d.UseCase.KakaoOauth(ctx, req)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	return c.JSON(http.StatusOK, res)
 }

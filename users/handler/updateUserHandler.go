@@ -31,7 +31,9 @@ func (d *UpdateUserHandler) Update(c echo.Context) error {
 	ctx, uID, email := _env.CtxGenerate(c)
 	req := &request.ReqUpdateUser{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	entity := entity.UpdateUserEntity{
@@ -57,7 +59,9 @@ func (d *UpdateUserHandler) Update(c echo.Context) error {
 
 	err := d.UseCase.Update(ctx, &entity)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	return c.JSON(http.StatusOK, true)

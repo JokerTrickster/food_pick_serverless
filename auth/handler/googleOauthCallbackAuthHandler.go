@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	_interface "main/model/interface"
 	"net/http"
 
@@ -25,15 +26,22 @@ func NewGoogleOauthCallbackAuthHandler(c *echo.Echo, useCase _interface.IGoogleO
 }
 
 func (d *GoogleOauthCallbackAuthHandler) GoogleOauthCallback(c echo.Context) error {
+	fmt.Println("GoogleOauthCallback")
 	ctx := context.Background()
 	req := &request.ReqGoogleOauthCallback{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	res, err := d.UseCase.GoogleOauthCallback(ctx, req.Code)
+	fmt.Println(res, err)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
+
 	return c.JSON(http.StatusOK, res)
 }

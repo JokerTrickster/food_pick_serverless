@@ -27,7 +27,9 @@ func (d *MetaFoodHandler) Meta(c echo.Context) error {
 
 	res, err := d.UseCase.Meta(ctx)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	// 캐시 히트 여부
 	c.Response().Header().Set("X-Cache-Hit", "true")

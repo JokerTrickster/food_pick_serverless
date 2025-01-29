@@ -27,11 +27,15 @@ func (d *SignupAuthHandler) Signup(c echo.Context) error {
 	ctx := context.Background()
 	req := &request.ReqSignup{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	res, err := d.UseCase.Signup(ctx, req)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	return c.JSON(http.StatusCreated, res)
 }

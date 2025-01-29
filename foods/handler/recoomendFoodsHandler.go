@@ -32,7 +32,9 @@ func (d *RecommendFoodHandler) Recommend(c echo.Context) error {
 	ctx, uID, _ := _env.CtxGenerate(c)
 	req := &request.ReqRecommendFood{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	//business logic
@@ -49,7 +51,9 @@ func (d *RecommendFoodHandler) Recommend(c echo.Context) error {
 
 	res, err := d.UseCase.Recommend(ctx, entity)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	return writeCustomJSON(c, http.StatusOK, res)
 }

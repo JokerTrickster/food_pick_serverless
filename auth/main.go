@@ -238,6 +238,7 @@ func InitializeGoogle() {
 		log.Printf("Failed to fetch Kakao SSM parameters: %v", err)
 	}
 	redirectUrl, err := ssmService.AwsSsmGetParam(ctx, "food_google_redirect_url")
+	fmt.Println(redirectUrl)
 	if err != nil {
 		log.Printf("Failed to fetch Kakao SSM parameters: %v", err)
 	}

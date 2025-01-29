@@ -27,7 +27,9 @@ func (d *RankFoodHandler) Rank(c echo.Context) error {
 	//business logic
 	res, err := d.UseCase.Rank(ctx)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	return c.JSON(http.StatusOK, res)

@@ -29,7 +29,9 @@ func (d *DailyRecommendFoodHandler) DailyRecommend(c echo.Context) error {
 	//business logic
 	res, err := d.UseCase.DailyRecommend(ctx)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	// 예제 응답

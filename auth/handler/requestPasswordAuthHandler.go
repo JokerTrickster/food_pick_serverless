@@ -28,7 +28,9 @@ func (d *RequestPasswordAuthHandler) RequestPassword(c echo.Context) error {
 	ctx := context.Background()
 	req := &request.ReqRequestPassword{}
 	if err := _validator.ValidateReq(c, req); err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 
 	entity := entity.RequestPasswordAuthEntity{
@@ -36,7 +38,9 @@ func (d *RequestPasswordAuthHandler) RequestPassword(c echo.Context) error {
 	}
 	_, err := d.UseCase.RequestPassword(ctx, entity)
 	if err != nil {
-		return c.JSON(_error.GenerateHTTPErrorResponse(err))
+		httpCode, resError := _error.GenerateHTTPErrorResponse(err)
+		// 반드시 에러를 반환
+		return echo.NewHTTPError(httpCode, resError)
 	}
 	return c.JSON(http.StatusOK, true)
 }
