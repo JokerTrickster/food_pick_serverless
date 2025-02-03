@@ -43,9 +43,8 @@ type IGoogleOauthAuthUseCase interface {
 }
 
 type IGoogleOauthCallbackAuthUseCase interface {
-	GoogleOauthCallback(c context.Context, code string) (response.ResGoogleOauthCallback, error)
+	GoogleOauthCallback(c context.Context, token string) (response.ResGoogleOauthCallback, error)
 }
-
 
 type IKakaoOauthAuthUseCase interface {
 	KakaoOauth(c context.Context, req *request.ReqKakaoOauth) (response.ResKakaoOauth, error)

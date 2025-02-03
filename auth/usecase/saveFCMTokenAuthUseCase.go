@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"context"
-	"fmt"
 	_interface "main/model/interface"
 	"main/model/request"
 	"time"
@@ -20,7 +19,6 @@ func NewSaveFCMTokenAuthUseCase(repo _interface.ISaveFCMTokenAuthRepository, tim
 func (d *SaveFCMTokenAuthUseCase) SaveFCMToken(c context.Context, uID uint, req *request.ReqSaveFCMToken) error {
 	ctx, cancel := context.WithTimeout(c, d.ContextTimeout)
 	defer cancel()
-	fmt.Println(ctx)
 	// 1. FCM 토큰 저장
 	userTokenDTO := CreateSaveFCMTokenDTO(uID, req)
 	err := d.Repository.SaveFCMToken(ctx, userTokenDTO)

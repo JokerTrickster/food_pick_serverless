@@ -251,6 +251,7 @@ func InitializeGoogle() {
 	}
 
 	googleService := _google.GetGoogleService()
+	fmt.Println(googleClientID, googleClientSecret, redirectUrl, googleIosID, googleAndID)
 	googleService.Initialize(googleClientID, googleClientSecret, redirectUrl, googleIosID, []string{googleAndID})
 	log.Println("Google Initialized")
 	return

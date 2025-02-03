@@ -2,15 +2,15 @@ package usecase
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
-	"main/model/entity"
 	_interface "main/model/interface"
 	"main/model/response"
 	"time"
 
-	_mysql "github.com/JokerTrickster/common/db/mysql"
+	_google "github.com/JokerTrickster/common/oauth/google"
+
+	"github.com/JokerTrickster/common/db/mysql"
 	_jwt "github.com/JokerTrickster/common/jwt"
 )
 
@@ -23,44 +23,49 @@ func NewGoogleOauthCallbackAuthUseCase(repo _interface.IGoogleOauthCallbackAuthR
 	return &GoogleOauthCallbackAuthUseCase{Repository: repo, ContextTimeout: timeout}
 }
 
-func (d *GoogleOauthCallbackAuthUseCase) GoogleOauthCallback(c context.Context, code string) (response.ResGoogleOauthCallback, error) {
+func (d *GoogleOauthCallbackAuthUseCase) GoogleOauthCallback(c context.Context, token string) (response.ResGoogleOauthCallback, error) {
 	ctx, cancel := context.WithTimeout(c, d.ContextTimeout)
 	defer cancel()
-	fmt.Println("code", code)
-	data, err := getGoogleUserInfo(ctx, code)
-	if err != nil {
-		return response.ResGoogleOauthCallback{}, err
-	}
-	var googleUser entity.GoogleUser
-	// JSON 파싱
-	if err := json.Unmarshal(data, &googleUser); err != nil {
-		log.Fatalf("Error parsing JSON: %v", err)
-	}
+	googleService := _google.GetGoogleService()
 
-	sqlEntity := &entity.GoogleOauthCallbackSQLQuery{
-		Email: googleUser.Email,
-	}
-	var user *_mysql.Users
-	//회원 계정이 있으면 통과 없으면 회원 가입
-	user, err = d.Repository.FindOneAndUpdateUser(ctx, sqlEntity.Email)
+	// 토큰 검증
+	oauthData, err := googleService.Validate(ctx, token)
+	fmt.Println(oauthData)
 	if err != nil {
 		return response.ResGoogleOauthCallback{}, err
+	}
+	// 유저 생성
+	userDTO := CreateGoogleUserDTO(oauthData)
+	fmt.Println(userDTO)
+	log.Println(userDTO)
+	var newUserDTO *mysql.Users
+	//유저 존재 체크
+	newUserDTO, err = d.Repository.FindOneUser(ctx, userDTO)
+	if err != nil {
+		return response.ResGoogleOauthCallback{}, err
+	}
+	if newUserDTO == nil {
+		// 유저 정보 insert
+		newUserDTO, err = d.Repository.InsertOneUser(ctx, userDTO)
+		if err != nil {
+			return response.ResGoogleOauthCallback{}, err
+		}
 	}
 
 	//토큰 생성
 	// token create
-	accessToken, _, refreshToken, refreshTknExpiredAt, err := _jwt.GenerateToken(user.Email, user.ID)
+	accessToken, _, refreshToken, refreshTknExpiredAt, err := _jwt.GenerateToken(newUserDTO.Email, newUserDTO.ID)
 	if err != nil {
 		return response.ResGoogleOauthCallback{}, err
 	}
 
 	// 기존 토큰 제거
-	err = d.Repository.DeleteToken(ctx, user.ID)
+	err = d.Repository.DeleteToken(ctx, newUserDTO.ID)
 	if err != nil {
 		return response.ResGoogleOauthCallback{}, err
 	}
 	// token db save
-	err = d.Repository.SaveToken(ctx, user.ID, accessToken, refreshToken, refreshTknExpiredAt)
+	err = d.Repository.SaveToken(ctx, newUserDTO.ID, accessToken, refreshToken, refreshTknExpiredAt)
 	if err != nil {
 		return response.ResGoogleOauthCallback{}, err
 	}
@@ -69,7 +74,7 @@ func (d *GoogleOauthCallbackAuthUseCase) GoogleOauthCallback(c context.Context, 
 	res := response.ResGoogleOauthCallback{
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken,
-		UserID:       user.ID,
+		UserID:       newUserDTO.ID,
 	}
 
 	return res, nil

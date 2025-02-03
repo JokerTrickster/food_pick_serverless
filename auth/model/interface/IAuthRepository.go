@@ -50,13 +50,12 @@ type IGuestAuthRepository interface {
 	RedisSetOneGuest(ctx context.Context, key string, data []byte) error
 }
 
-
 type IGoogleOauthCallbackAuthRepository interface {
 	SaveToken(ctx context.Context, uID uint, accessToken, refreshToken string, refreshTknExpiredAt int64) error
 	DeleteToken(ctx context.Context, uID uint) error
-	FindOneAndUpdateUser(ctx context.Context, email string) (*_mysql.Users, error)
+	InsertOneUser(ctx context.Context, user *_mysql.Users) (*_mysql.Users, error)
+	FindOneUser(ctx context.Context, user *_mysql.Users) (*_mysql.Users, error)
 }
-
 
 type IKakaoOauthAuthRepository interface {
 	SaveToken(ctx context.Context, uID uint, accessToken, refreshToken string, refreshTknExpiredAt int64) error

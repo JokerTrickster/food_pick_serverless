@@ -1,5 +1,5 @@
 package request
 
 type ReqGoogleOauthCallback struct {
-	Code string `query:"code"`
+	Token string `json:"token"`
 }
