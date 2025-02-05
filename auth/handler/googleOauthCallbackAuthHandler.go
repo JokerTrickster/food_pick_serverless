@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	_interface "main/model/interface"
 	"net/http"
 
@@ -20,7 +21,7 @@ func NewGoogleOauthCallbackAuthHandler(c *echo.Echo, useCase _interface.IGoogleO
 	handler := &GoogleOauthCallbackAuthHandler{
 		UseCase: useCase,
 	}
-	c.POST("/v0.1/auth/google/callback", handler.GoogleOauthCallback)
+	c.POST("/v0.1/auth/google", handler.GoogleOauthCallback)
 	return handler
 }
 
@@ -30,6 +31,7 @@ func (d *GoogleOauthCallbackAuthHandler) GoogleOauthCallback(c echo.Context) err
 	if err := _validator.ValidateReq(c, req); err != nil {
 		return c.JSON(_error.GenerateHTTPErrorResponse(err))
 	}
+	fmt.Println("토큰 ID ,", req.Token)
 	res, err := d.UseCase.GoogleOauthCallback(ctx, req.Token)
 	if err != nil {
 		return c.JSON(_error.GenerateHTTPErrorResponse(err))
