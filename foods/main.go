@@ -71,15 +71,15 @@ func InitializeRedis() {
 	ctx := context.Background()
 	// Define SSM keys for Redis configuration
 	ssmKeys := []string{
-		"dev_common_redis_host",
-		"dev_common_redis_port",
+		"dev_food_redis_host",
+		"dev_food_redis_port",
 		"dev_food_redis_db",
 		"dev_food_redis_password",
 		"dev_food_redis_user",
 	}
 
 	// Initialize AWS SSM service
-	_ = _aws.GetAWSService("ap-northeast-2")
+	_ = _aws.GetAWSService("ap-south-1")
 	ssmService := _aws.SSMService{}
 
 	// Fetch Redis connection parameters from SSM
@@ -110,15 +110,15 @@ func InitializeJWT() {
 func InitializeDatabase(ctx context.Context) string {
 	// Define SSM keys for MySQL configuration
 	ssmKeys := []string{
-		"dev_common_mysql_host",
-		"dev_common_mysql_port",
+		"dev_food_mysql_host",
+		"dev_food_mysql_port",
 		"dev_food_mysql_db",
 		"dev_food_mysql_password",
 		"dev_food_mysql_user",
 	}
 
 	// Initialize AWS SSM service
-	_ = _aws.GetAWSService("ap-northeast-2")
+	_ = _aws.GetAWSService("ap-south-1")
 	ssmService := _aws.SSMService{}
 
 	// Fetch MySQL connection parameters from SSM

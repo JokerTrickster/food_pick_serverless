@@ -11,10 +11,10 @@ Globals:
       - x86_64
     VpcConfig:                       # 공통 VPC 설정
       SecurityGroupIds:
-        - sg-07fc0de84a8e119c0
+        - sg-0ec4c8d3cd69468b2
       SubnetIds:
-        - subnet-017c0de3d874cab7e
-        - subnet-00bd54fe53b26180d
+        - subnet-0c038a1a778a90688
+        - subnet-024dbdea1f5e550db
 
 Resources:
   ### 고정 CloudWatch Log Group 생성 ###
